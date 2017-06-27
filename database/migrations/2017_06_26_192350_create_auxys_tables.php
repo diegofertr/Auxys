@@ -18,13 +18,13 @@
           $table->date('gestion')->required();
           $table->enum('semestre', ['Primer', 'Segundo'])->required();
           $table->enum('modalidad', ['Primera', 'Segunda'])->required();
-          $table->date('desde');
-          $table->date('hasta');
-          $table->date('fecha_de_publicacion');
-          $table->string('description', 255);
-          $table->string('decano', 255);
-          $table->string('vice_decano', 255);
-          $table->string('director', 255);
+          $table->date('desde')->nullable();
+          $table->date('hasta')->nullable();
+          $table->date('fecha_de_publicacion')->nullable();
+          $table->string('description', 255)->nullable();
+          $table->string('decano', 255)->nullable();
+          $table->string('vice_decano', 255)->nullable();
+          $table->string('director', 255)->nullable();
           $table->timestamps();
           $table->softDeletes();
       });
@@ -40,8 +40,8 @@
         Schema::create('convocatoria_materia', function(Blueprint $table) {
             $table->bigInteger('convocatoria_id')->unsigned();
             $table->bigInteger('materia_id')->unsigned();
-            $table->integer('plazas')->unsigned();
-            $table->integer('carga_horaria')->unsigned();
+            $table->integer('plazas')->unsigned()->nullable();
+            $table->integer('carga_horaria')->unsigned()->nullable();
             $table->foreign('convocatoria_id')->references('id')->on('convocatorias');
             $table->foreign('materia_id')->references('id')->on('materias');
         });
@@ -63,9 +63,12 @@
 
       //recursivo materia
         Schema::create('requisitos_m', function(Blueprint $table) {
-            $table->bigIncrements('id');
+
             $table->bigInteger('materia_id')->unsigned();
+            $table->bigInteger('materia_req_id')->unsigned();
             $table->foreign('materia_id')->references('id')->on('materias');
+            $table->foreign('materia_req_id')->references('id')->on('materias');
+            $table->primary(['materia_id', 'materia_req_id']);
 
         });
 
