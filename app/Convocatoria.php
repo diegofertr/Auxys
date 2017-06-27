@@ -34,7 +34,7 @@ class Convocatoria extends Model
 	}
 
    public function requisitosC(){
-      return $this->belongsToMany('Auxys\RequisitosC','convocatoria_requisito','convocatoria_id','requisitoc_id');
+      return $this->belongsToMany('Auxys\RequisitosConvocatoria','convocatoria_requisito','convocatoria_id','requisitoc_id');
    }
 
 }

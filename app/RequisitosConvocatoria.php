@@ -5,7 +5,7 @@ namespace Auxys;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class RequisitosC extends Model
+class RequisitosConvocatoria extends Model
 {
     
 	use softDeletes;

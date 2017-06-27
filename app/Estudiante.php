@@ -28,6 +28,6 @@ class Estudiante extends Model
 	}
 
 	public function requisitosC(){
-      return $this->belongsToMany('Auxys\RequisitosC','documentos_entregados','estudiante_id','requisitoc_id');
+      return $this->belongsToMany('Auxys\RequisitosConvocatoria','documentos_entregados','estudiante_id','requisitoc_id');
    }
 }
