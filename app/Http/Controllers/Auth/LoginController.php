@@ -4,6 +4,8 @@ namespace Auxys\Http\Controllers\Auth;
 
 use Auxys\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
+use Auth;
 
 class LoginController extends Controller
 {
@@ -35,5 +37,39 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+
+     public function login(Request $request)
+    {
+
+        //dd($request);
+        if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+            // Authentication passed...
+            return redirect()->intended($this->redirectPath());
+        }
+
+
+        else{
+            // $rules = [
+            //     'username' => 'required',
+            //     'password' => 'required',
+            // ];
+
+            // $messages = [
+            //     'username.required' => 'El Nombre de usuario es requerido',
+            //     'password.required' => 'La Contraseña es requerida',
+            // ];
+
+            // $validator = Validator::make($request->all(), $rules, $messages);
+
+            return redirect('login');
+            // ->withErrors($validator)
+            // ->withInput()
+         } 
+    }
+    public function logout(){
+        Auth::logout();
+        return redirect('login');
     }
 }
