@@ -11,11 +11,26 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
+// Route::post('login', 'Auth\LoginController@login');
+// Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 
-Route::resource('/student', 'StudentController');
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::group(['middleware' => 'auth'], function() {
+
+		Route::get('/', function () {
+		    return view('welcome');
+		});
+		Route::get('/home', 'HomeController@index')->name('home');
+
+		Route::get('foo',function(){
+			return "hola";
+		});
+
+
+});
+//Route::resource('/student', 'StudentController');
+//Auth::routes();
+
+//Route::get('/home', 'HomeController@index')->name('home');
