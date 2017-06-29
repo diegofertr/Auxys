@@ -11,26 +11,19 @@
 |
 */
 
-// Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
-// Route::post('login', 'Auth\LoginController@login');
-// Route::post('logout', 'Auth\LoginController@logout')->name('logout');
-
-Auth::routes();
-
-Route::group(['middleware' => 'auth'], function() {
-
-		Route::get('/', function () {
-		    return view('welcome');
-		});
-		Route::get('/home', 'HomeController@index')->name('home');
-
-		Route::get('foo',function(){
-			return "hola";
-		});
-
-
+Route::get('/', function () {
+    return view('vendor.adminlte.auth.login');
 });
-//Route::resource('/student', 'StudentController');
-//Auth::routes();
 
-//Route::get('/home', 'HomeController@index')->name('home');
+Route::group(['middleware' => 'auth'], function () {
+    //    Route::get('/link1', function ()    {
+//        // Uses Auth Middleware
+//    });
+
+	Route::get('/foo', function () {
+		return "Hola";
+	});
+
+    //Please do not remove this if you want adminlte:route and adminlte:link commands to works correctly.
+    #adminlte_routes
+});
