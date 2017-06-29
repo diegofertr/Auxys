@@ -20,6 +20,10 @@ Route::group(['middleware' => 'auth'], function () {
 //        // Uses Auth Middleware
 //    });
 
+	Route::get('convocatoria', function (){
+		return view('convocatoria.index');
+	});
+
 	Route::get('/foo', function () {
 		return "Hola";
 	});
