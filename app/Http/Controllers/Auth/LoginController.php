@@ -5,6 +5,7 @@ namespace Auxys\Http\Controllers\Auth;
 use Auxys\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use Auth;
 
 class LoginController extends Controller
 {
@@ -55,6 +56,9 @@ class LoginController extends Controller
      *
      * @return string
      */
+
+
+   
     public function username()
     {
         return config('auth.providers.users.field','email');
@@ -66,27 +70,31 @@ class LoginController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return bool
      */
+
+
     protected function attemptLogin(Request $request)
     {
-        if ($this->username() === 'email') return $this->attemptLoginAtAuthenticatesUsers($request);
+        if ($this->username() === 'email') 
+            return $this->attemptLoginAtAuthenticatesUsers($request);
         if ( ! $this->attemptLoginAtAuthenticatesUsers($request)) {
             return $this->attempLoginUsingUsernameAsAnEmail($request);
         }
         return false;
     }
 
-    /**
+     /**
      * Attempt to log the user into application using username as an email.
      *
      * @param \Illuminate\Http\Request $request
      * @return bool
      */
+     
     protected function attempLoginUsingUsernameAsAnEmail(Request $request)
     {
         return $this->guard()->attempt(
             ['email' => $request->input('username'), 'password' => $request->input('password')],
             $request->has('remember'));
-    }
+     }
 
 
 }
