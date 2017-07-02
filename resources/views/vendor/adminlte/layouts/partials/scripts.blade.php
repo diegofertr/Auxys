@@ -2,6 +2,10 @@
 
 <!-- JQuery and bootstrap are required by Laravel 5.3 in resources/assets/js/bootstrap.js-->
 <!-- Laravel App -->
+<script src="/bower_components/jquery/dist/jquery.min.js"></script>
+<script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="/bower_components/bootstrap-material-design/js/ripples.js"></script>
+<script src="/bower_components/bootstrap-material-design/js/bootstrapMaterialDesign.js"></script>
 <script src="{{ url (mix('/js/app.js')) }}" type="text/javascript"></script>
 
 <!-- Optionally, you can add Slimscroll and FastClick plugins.

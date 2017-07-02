@@ -9,7 +9,7 @@
     <div id="app" v-cloak>
         <div class="login-box">
             <div class="login-logo">
-                <a href="{{ url('/home') }}"><b>Admin</b>LTE</a>
+                <a href="{{ url('/home') }}"><b>Auxys</b></a>
             </div><!-- /.login-logo -->
 
         @if (count($errors) > 0)
@@ -24,12 +24,12 @@
         @endif
 
         <div class="login-box-body">
-        <p class="login-box-msg"> {{ trans('adminlte_lang::message.siginsession') }} </p>
+        <p class="login-box-msg">Inicia Sesión</p>
 
         <login-form name="{{ config('auth.providers.users.field','email') }}"
                     domain="{{ config('auth.defaults.domain','') }}"></login-form>
 
-        @include('adminlte::auth.partials.social_login')
+        {{-- @include('adminlte::auth.partials.social_login') --}}
 
         <a href="{{ url('/password/reset') }}">{{ trans('adminlte_lang::message.forgotpassword') }}</a><br>
         <a href="{{ url('/register') }}" class="text-center">{{ trans('adminlte_lang::message.registermember') }}</a>

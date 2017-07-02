@@ -20,9 +20,20 @@ Route::group(['middleware' => 'auth'], function () {
 		});
 		
     //    Route::get('/link1', function ()    {
+	Route::get('/home','HomeController@index');
+
+	Route::get('convocatoria', function (){
+		return view('convocatoria.index');
+	});
+
+	Route::get('/foo', function () {
+		return "Hola";
+	});
 //        // Uses Auth Middleware
 //    });
-	Route::get('/home', 'HomeController@index')->name('home');
+
+
+
     //Please do not remove this if you want adminlte:route and adminlte:link commands to works correctly.
     #adminlte_routes
 });
