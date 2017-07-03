@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 
 /**
  * Class HomeController
- * @package App\Http\Controllers
+ * @package Auxys\Http\Controllers
  */
 class HomeController extends Controller
 {

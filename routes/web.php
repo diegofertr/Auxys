@@ -10,33 +10,23 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Auth::routes();
+
+
+Route::get('/', function () {
+	return view('adminlte::auth.login');
+});
 
 
 Route::group(['middleware' => 'auth'], function () {
-	
-	Route::get('/', function () {
-		    return view('welcome');
-		});
-		
     //    Route::get('/link1', function ()    {
-	Route::get('/home','HomeController@index');
-
-	Route::get('convocatoria', function (){
-		return view('convocatoria.index');
-	});
-
-	Route::get('/foo', function () {
-		return "Hola";
-	});
 //        // Uses Auth Middleware
 //    });
+	Route::get('home', 'HomeController@index');
+	Route::resource('convocatoria', 'ConvocatoriaController');
+	// Route::get('get_convocatoria', 'ConvocatoriaController@dataTables');
 
-
+	Route::get('get_convocatoria', array('as'=>'get_convocatoria', 'uses'=>'ConvocatoriaController@dataTables'));
 
     //Please do not remove this if you want adminlte:route and adminlte:link commands to works correctly.
     #adminlte_routes
 });
-
-
-

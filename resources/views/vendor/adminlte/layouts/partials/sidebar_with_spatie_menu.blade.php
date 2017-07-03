@@ -30,7 +30,7 @@
         <!-- /.search form -->
 
         <!-- Sidebar Menu -->
-        {{ Menu::sidebar() }}
+        {{-- {{ Menu::sidebar() }} --}}
         <!-- /.sidebar-menu -->
     </section>
     <!-- /.sidebar -->
