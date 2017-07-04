@@ -32,4 +32,5 @@ Route::group(['middleware' => 'auth'], function () {
    
     //for users
     Route::resource('users','User\UserController');
+    Route::get('getUsers','User\UserController@getUsers');
 });

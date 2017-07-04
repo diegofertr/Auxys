@@ -5,6 +5,8 @@ namespace Auxys\Http\Controllers\User;
 use Illuminate\Http\Request;
 use Auxys\Http\Controllers\Controller;
 use Auxys\User;
+use Yajra\Datatables\Datatables;
+
 class UserController extends Controller
 {
     /**
@@ -16,7 +18,12 @@ class UserController extends Controller
     {
         return view('users.index');
     }
-
+    public function getUsers(Datatables $datatables)
+    {
+    return $datatables->eloquent(User::select('id', 'name','username', 'email'))
+        //->addColumn('action', 'eloquent.tables.users-action')
+        ->make();        
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -24,7 +31,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view('users.create');
     }
 
     /**
@@ -35,7 +42,12 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user = new User();
+        $user->name=$request->name;
+        $user->username=$request->username;
+        $user->password=bcrypt($request->password);
+        $user->save();
+        return redirect()->route('users.index');
     }
 
     /**

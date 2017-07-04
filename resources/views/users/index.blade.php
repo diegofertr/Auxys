@@ -7,64 +7,42 @@ Lista de usuarios
 @endsection
 @section('main-content')
     <div class="container-fluid spark-screen">
+    <div class="row">
+    <a href="{{url('users/create')}}" class="btn btn-success" role="button"><i class="fa fa-plus"></i></a>
+    </div>
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
-                     <div class="row">
-                        <div class="col-md-12">
-                            <table class="table table-bordered table-hover" id="economic_complements-table">
-                                <thead>
-                                    <tr class="success">
-                                        <th class="text-center"><div data-toggle="tooltip" data-placement="top" data-container="body" data-original-title="Número de Trámite">Número</div></th>
-                                        <th class="text-left"><div data-toggle="tooltip" data-placement="top" data-container="body" data-original-title="Concepto de Cobro">Número de Carnet</div></th>
-                                        <th class="text-left"><div data-toggle="tooltip" data-placement="top" data-container="body" data-original-title="Nombre de Afiliado">Nombre de Beneficiario</div></th>
-                                        <th class="text-left"><div data-toggle="tooltip" data-placement="top" data-container="body" data-original-title="Total a Pagar">Fecha Emisión</div></th>
-                                        <th clas
-                                        s="text-left"><div data-toggle="tooltip" data-placement="top" data-container="body" data-original-title="Estado">Estado</div></th>
-                                        <th class="text-left"><div data-toggle="tooltip" data-placement="top" data-container="body" data-original-title="Fecha de Pago">Modalidad</div></th>
-                                        <th class="text-center">Acción</th>
-                                    </tr>
-                                </thead>
-                            </table>
-                        </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <table id="users-table" class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Name</th>
+                                    <th>userName</th>
+                                    <th>Email</th>
+                                    {{-- <th>Action</th> --}}
+                                </tr>
+                            </thead>
+                        </table>
                     </div>
+                </div>
             </div>
         </div>
     </div>
 @endsection
-
-
+@push('styles')
+<link rel="stylesheet" type="text/css" href="/css/jquery.dataTables.min.css">
+@endpush
 @push('scripts')
-    
+<script type="text/javascript" src="/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript">
-
-            console.log($('#economic_complements-table').html;
-
-            var oTable = $('#economic_complements-table').DataTable({
-            "dom": '<"top">t<"bottom"p>',
-            processing: true,
-            serverSide: true,
-            pageLength: 8,
-            autoWidth: false,
-            ajax: {
-                url: '{!! route('get_convocatoria') !!}',
-           /*     data: function (d) {
-                    d.code = $('input[name=code]').val();
-                    d.affiliate_identitycard = $('input[name=affiliate_identitycard]').val();
-                    d.creation_date = $('input[name=creation_date]').val();
-                    d.eco_com_state_id = $('input[name=eco_com_state_id]').val();
-                    d.eco_com_modality_id = $('select[name=eco_com_modality_id]').val();
-                    d.post = $('input[name=post]').val();
-                }*/
-            },
-            columns: [
-                { data: 'gestion', sClass: "text-center" }
-                /*{ data: 'affiliate_identitycard', bSortable: false },
-                { data: 'affiliate_name', bSortable: false },
-                { data: 'created_at', bSortable: false },
-                { data: 'eco_com_state', bSortable: false },
-                { data: 'eco_com_modality', bSortable: false },
-                { data: 'action', name: 'action', orderable: false, searchable: false, bSortable: false, sClass: "text-center" }*/
-            ]
+        $(function () {
+            $('#users-table').DataTable({
+                serverSide: true,
+                processing: true,
+                ajax: '/getUsers'
+            });
         });
     </script>
 @endpush
