@@ -2,7 +2,9 @@
 
 namespace Auxys\Http\Controllers;
 
+use Auxys\Materia;
 use Illuminate\Http\Request;
+use Yajra\Datatables\Datatables;
 
 class MateriaController extends Controller
 {
@@ -13,7 +15,26 @@ class MateriaController extends Controller
      */
     public function index()
     {
-        
+        return view('materias.index');
+    }
+
+    public function getMaterias(Request $request) {
+        $materias = Materia::select(['id', 'sigla', 'descripcion'])->get();
+        return Datatables::of($materias)
+        ->addColumn('action', function ($materia) { return
+            '<div class="btn-group">
+              <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModal">
+                Editar
+              </button>
+              <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="caret"></span>
+                <span class="sr-only">Toggle Dropdown</span>
+              </button>
+              <ul class="dropdown-menu">
+                <li><a href="/materias/deleteM/' .$materia->id. '" ><i class="glyphicon glyphicon-minus"></i>Eliminar</a></li>
+              </ul>
+            </div>';})
+        ->make(true);        
     }
 
     /**
@@ -23,7 +44,7 @@ class MateriaController extends Controller
      */
     public function create()
     {
-        //
+        return view('materias.create');
     }
 
     /**
@@ -34,7 +55,11 @@ class MateriaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $materia = new Materia();
+        $materia->sigla = $request->sigla;
+        $materia->descripcion = $request->descripcion;
+        $materia->save();
+        return redirect()->route('materias.index');
     }
 
     /**
@@ -80,5 +105,11 @@ class MateriaController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function deleteM($id){
+        $materia = Materia::find($id);
+        $materia->delete();
+        return back();
     }
 }
