@@ -90,7 +90,7 @@ return [
     |
     */
 
-    'fallback_locale' => 'en',
+    'fallback_locale' => 'es',
 
     /*
     |--------------------------------------------------------------------------
@@ -189,6 +189,8 @@ return [
         */
 
          Yajra\Datatables\DatatablesServiceProvider::class,
+         Collective\Html\HtmlServiceProvider::class,
+        
     ],
 
     /*
@@ -244,6 +246,8 @@ return [
          */
         'AdminLTE' => Acacha\AdminLTETemplateLaravel\Facades\AdminLTE::class,
         #llum_aliases
+        'Form' => Collective\Html\FormFacade::class,
+        'Html' => Collective\Html\HtmlFacade::class,
 
     ],
 

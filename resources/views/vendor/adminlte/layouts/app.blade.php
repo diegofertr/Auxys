@@ -58,6 +58,7 @@ desired effect
 @section('scripts')
     @include('adminlte::layouts.partials.scripts')
 @show
-
+@stack('scripts')
+@stack('styles')
 </body>
 </html>

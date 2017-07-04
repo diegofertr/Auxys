@@ -12,7 +12,7 @@
             <h3 class="control-sidebar-heading">{{ trans('adminlte_lang::message.recentactivity') }}</h3>
             <ul class='control-sidebar-menu'>
                 <li>
-                    <a href='javascript::;'>
+                    <a href='{{route('users.create')}}'>
                         <i class="menu-icon fa fa-birthday-cake bg-red"></i>
                         <div class="menu-info">
                             <h4 class="control-sidebar-subheading">{{ trans('adminlte_lang::message.birthday') }}</h4>
@@ -42,7 +42,17 @@
         <div class="tab-pane" id="control-sidebar-stats-tab">{{ trans('adminlte_lang::message.statstab') }}</div><!-- /.tab-pane -->
         <!-- Settings tab content -->
         <div class="tab-pane" id="control-sidebar-settings-tab">
-            <form method="post">
+        <ul class='control-sidebar-menu'>
+            <li>
+                <a href='{{route('users.index')}}'>
+                    <i class="menu-icon fa fa-user bg-blue"></i>
+                    <div class="menu-info">
+                        <h4 class="control-sidebar-subheading">Usuarios</h4>
+                    </div>
+                </a>
+            </li>
+        </ul>
+            {{-- <form method="post">
                 <h3 class="control-sidebar-heading">{{ trans('adminlte_lang::message.generalset') }}</h3>
                 <div class="form-group">
                     <label class="control-sidebar-subheading">
@@ -53,7 +63,7 @@
                         {{ trans('adminlte_lang::message.informationsettings') }}
                     </p>
                 </div><!-- /.form-group -->
-            </form>
+            </form> --}}
         </div><!-- /.tab-pane -->
     </div>
 </aside><!-- /.control-sidebar
