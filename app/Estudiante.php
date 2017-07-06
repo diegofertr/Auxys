@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Estudiante extends Model
 {
-    use softDeletes;
+    //use softDeletes;
 
 	protected $table = 'estudiantes';
 
@@ -23,8 +23,12 @@ class Estudiante extends Model
 
 	protected $guarded = ['id'];
 
-	public function materias(){
+	public function materias_postula(){
 		return $this->belongsToMany('Auxys\Materia', 'estudiante_postula_materia','estudiante_id','materia_id');
+	}
+	public function materias()
+	{
+		return $this->belongsTomany(Materia::class);
 	}
 
 	public function requisitosC(){

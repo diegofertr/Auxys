@@ -11,26 +11,36 @@
 |
 */
 
-// Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
-// Route::post('login', 'Auth\LoginController@login');
-// Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 
-Auth::routes();
-
-Route::group(['middleware' => 'auth'], function() {
-
-		Route::get('/', function () {
-		    return view('welcome');
-		});
-		Route::get('/home', 'HomeController@index')->name('home');
-
-		Route::get('foo',function(){
-			return "hola";
-		});
-
-
+Route::get('/', function () {
+	return view('adminlte::auth.login');
 });
-//Route::resource('/student', 'StudentController');
-//Auth::routes();
 
-//Route::get('/home', 'HomeController@index')->name('home');
+
+Route::group(['middleware' => 'auth'], function () {
+    //    Route::get('/link1', function ()    {
+//        // Uses Auth Middleware
+//    });
+	Route::get('home', 'HomeController@index');
+	Route::resource('convocatoria', 'ConvocatoriaController');
+	// Route::get('get_convocatoria', 'ConvocatoriaController@dataTables');
+
+	Route::get('get_convocatoria', array('as'=>'get_convocatoria', 'uses'=>'ConvocatoriaController@dataTables'));
+
+    //for materias
+    Route::resource('materias', 'MateriaController');
+    Route::get('getMaterias',['as'=>'getMaterias','uses'=>'MateriaController@getMaterias']);
+    Route::get('materias/deleteM/{id}',['as'=>'deleteM','uses'=>'MateriaController@deleteM']);
+
+    //Please do not remove this if you want adminlte:route and adminlte:link commands to works correctly.
+    #adminlte_routes
+   
+    //for users
+    Route::resource('users','User\UserController');
+    Route::get('getUsers','User\UserController@getUsers');
+
+    //import
+    
+    Route::get('student/import','Student\StudentController@import');
+    Route::post('importStudents','Student\StudentController@importStudents');
+});

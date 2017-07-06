@@ -79,7 +79,8 @@
             $table->string('nombre');
             $table->string('paterno');
             $table->string('materno');
-            $table->json('materias');
+            $table->timestamps();
+            //$table->json('materias');
         });
 
         Schema::create('documentos_entregados', function(Blueprint $table) {
@@ -109,7 +110,16 @@
             $table->unique(['estudiante_id','materia_id']);
             $table->timestamps();
             $table->softDeletes();
+        });
 
+        Schema::create('estudiante_materia', function(BLueprint $table){
+            $table->bigInteger('estudiante_id')->unsigned();
+            $table->bigInteger('materia_id')->unsigned();
+            $table->decimal('nota',5,2);
+            $table->string('periodo');
+            $table->foreign('estudiante_id')->references('id')->on('estudiantes');
+            $table->foreign('materia_id')->references('id')->on('materias');
+            $table->unique(['estudiante_id','materia_id']); 
         });
 
     }
@@ -121,6 +131,7 @@
      */
     public function down()
     {
+        Schema::dropIfExists('estudiante_materia');
         Schema::dropIfExists('estudiante_postula_materia');
         Schema::dropIfExists('documentos_entregados');
         Schema::dropIfExists('estudiantes');

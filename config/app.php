@@ -90,7 +90,7 @@ return [
     |
     */
 
-    'fallback_locale' => 'en',
+    'fallback_locale' => 'es',
 
     /*
     |--------------------------------------------------------------------------
@@ -164,6 +164,14 @@ return [
         Illuminate\View\ViewServiceProvider::class,
 
         /*
+         * Acacha Llum Service Providers...
+         *
+         * See: https://github.com/acacha/llum
+         */
+        Acacha\AdminLTETemplateLaravel\Providers\AdminLTETemplateServiceProvider::class,
+        #llum_providers
+
+        /*
          * Package Service Providers...
          */
         Laravel\Tinker\TinkerServiceProvider::class,
@@ -176,7 +184,14 @@ return [
         // Auxys\Providers\BroadcastServiceProvider::class,
         Auxys\Providers\EventServiceProvider::class,
         Auxys\Providers\RouteServiceProvider::class,
+        /*
+        * Acacha AdminLTE template provider
+        */
 
+         Yajra\Datatables\DatatablesServiceProvider::class,
+         Collective\Html\HtmlServiceProvider::class,
+         Maatwebsite\Excel\ExcelServiceProvider::class,
+        
     ],
 
     /*
@@ -225,6 +240,16 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+        /*
+         * Acacha Llum Aliases...
+         *
+         * See: https://github.com/acacha/llum
+         */
+        'AdminLTE' => Acacha\AdminLTETemplateLaravel\Facades\AdminLTE::class,
+        #llum_aliases
+        'Form' => Collective\Html\FormFacade::class,
+        'Html' => Collective\Html\HtmlFacade::class,
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
 
     ],
 
