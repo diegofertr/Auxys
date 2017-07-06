@@ -1,0 +1,163 @@
+id_plan_estudio;codigo;nombre
+1;MAT-130;Álgebra
+1;MAT-263;Análisis de Sistemas I
+1;MAT-264;Análisis de Sistemas II
+1;MAT-241;Análisis Numérico I
+1;MAT-362;Análisis Numérico II
+1;MAT-363;Auditoría de Sistemas y Programación
+1;MAT-132;Cálculo I
+1;MAT-274;Cálculo III
+1;MAT-278;Cálculo IV
+1;MAT-248;Cibernética I
+1;MAT-249;Cibernética II
+1;MAT-121;Combinatoria
+1;MAT-398;Diseño de Compiladores
+1;MAT-144;Estadística Descriptiva
+1;MAT-236;Estructura de la Información
+1;MAT-260;Hardware I
+1;MAT-262;Hardware II
+1;MAT-261;Hardware III – Microprocesadores
+1;MAT-270;Informática I
+1;MAT-272;Informática II
+1;MAT-361;Ingeniería de Sistemas I
+1;MAT-365;Ingeniería de Sistemas II
+1;MAT-420;Inteligencia Artificial
+1;MAT-120;Introducción a la Programación
+1;MAT-286;Investigación Operativa I
+1;MAT-288;Investigación Operativa II
+1;MAT-290;Investigación Operativa III
+1;MAT-333;Muestreo I
+1;MAT-373;Organización y Métodos de Información
+1;MAT-311;Preparación y Evaluación de Proyectos
+1;MAT-280;Probabilidad y Estadística I
+1;MAT-246;Programación de Sistemas I
+1;MAT-247;Programación de Sistemas II
+1;MAT-400;Programación Gráfica
+1;MAT-390;Seminario I
+1;MAT-391;Seminario II
+1;MAT-392;Seminario III
+1;MAT-380;Simulación y Modelaje
+1;MAT-134;Cálculo II
+1;MAT-370;Sistemas Administrativos II
+1;CPA-201;Sistemas Contables
+1;MAT-255;Sistemas de Información I
+1;MAT-256;Sistemas de Información II
+1;MAT-223;Sistemas de Procesamiento de Datos
+1;ECO-240;Sistemas Económicos I
+1;ECO-241;Sistemas Económicos II
+1;INF-398;Taller de Licenciatura I
+1;INF-399;Taller de Licenciatura II
+1;MAT-258;Teoría de Control Óptimo
+1;MAT-364;Teoría de la Computación I
+1;MAT-366;Teoría de la Computación II
+1;MAT-368;Teoría General de Sistemas
+1;LIN-117;Traducción Técnica II
+1;LIN-116;Traducción Técnica I
+1;MAT-434;Arquitectura y Procesamiento Paralelo
+1;MAT-425;Ciencia de la Computación I
+1;MAT-285;Ciencias de la Computación
+1;MAT-401;Comunicación de Datos
+1;MAT-250;Diseño de Sistemas Operativos
+1;MAT-426;Ingeniería de Software
+1;MAT-336;Modelos Lineales
+1;MAT-428;Organización de Computadoras
+1;MAT-410;Programación Lógica
+1;MAT-424;Simulación Gráfica
+1;MAT-422;Sistemas Expertos
+2;MAT-124;Álgebra Lineal
+2;INF-121;Algoritmos y Programación
+2;MAT-115;Análisis Matemático I
+2;MAT-125;Análisis Matemático II
+2;MAT-134;Análisis Matemático III
+2;MAT-156;Análisis Numérico
+2;INF-153;Assembler
+2;INF-161;Diseño y Administración de Base de Datos
+2;EST-133;Estadística I
+2;EST-145;Estadística II
+2;INF-131;Estructura de Datos y Algoritmos
+2;FIS-122;Física I
+2;FIS-132;Física II
+2;INF-142;Fundamentos Digitales
+2;LIN-116;Gramática Española
+2;LIN-135;Idioma I
+2;INF-166;Informática y Sociedad
+2;INF-163;Ingeniería de Software
+2;INF-111;Introducción a la Informática
+2;EST-155;Investigación de Operaciones I
+2;EST-165;Investigación de Operaciones II
+2;INF-113;Laboratorio de Computación
+2;LAB-122;Laboratorio de Física I
+2;LAB-132;Laboratorio de Física II
+2;LAB-111;Laboratorio de Inf-111
+2;LAB-121;Laboratorio de Inf-121
+2;LAB-131;Laboratorio de Inf-131
+2;LAB-273;Laboratorio de Inf-273
+2;INF-154;Lenguajes Formales y Autómatas
+2;INF-144;Lógica para la Ciencia de la Computación
+2;MAT-114;Matemática Discreta I
+2;MAT-123;Matemática Discreta II
+2;INF-112;Organización de Computadoras
+2;INF-141;Sistemas de Gestión
+2;INF-152;Sistemas de Información Gerencial
+2;INF-151;Sistemas Operativos
+2;INF-272;Taller de Base de Datos
+2;INF-143;Taller de Programación
+2;INF-273;Telemática
+2;INF-271;Teoría de Sistemas y Modelos
+1;MAT-444;Comparación de Lenguajes
+2;INF-355;Lenguajes Naturales y Formales
+2;INF-328;Comparación de Lenguajes
+2;MAT-144;Estadística Descriptiva
+2;INF-391;Simulación de Sistemas
+2;INF-322;Programación Distribuida
+1;MAT-374;Administración de Centros de Procesamiento de Datos
+1;MAT-136;Álgebra Lineal
+1;MAT-397;Diseño y Análisis de Algoritmos
+1;MAT-282;Probabilidad y Estadística II
+2;INF-312;Administración de Unidades de Procesamiento de Datos
+2;INF-340;Arquitectura de Computadoras y Procesamientos en Paralelo
+2;INF-319;Programación Funcional y Software
+2;INF-363;Modelos Lineales
+2;INF-354;Inteligencia Artificial
+2;INF-359;Compiladores y Traductores
+2;MAT-398;Diseño de Compiladores
+2;INF-365;Simulación y Modelaje
+2;INF-331;Organización y Métodos de Información
+2;INF-282;Especificaciones Formales y Verificación
+2;CPA-201;Sistemas Contables
+2;ECO-241;Sistemas Económicos II
+2;INF-329;Idiomas II
+2;INF-357;Robótica
+2;INF-351;Sistemas Expertos
+2;INF-369;Procesos Estocásticos
+2;INF-336;Teoría General de Sistemas
+2;INF-360;Computabilidad y Complejidad Algorítmica
+2;INF-333;Preparación y Evaluación de Proyectos I
+2;INF-330;Hardware I
+2;INF-364;Diseño Experimental
+2;INF-332;Economía
+2;INF-334;Preparación y Evaluación de Proyectos II
+2;INF-317;Sistemas en Tiempo Real y Distribuido
+2;INF-367;Investigación Operativa III
+2;INF-324;Programación Multimedial
+2;INF-323;Programación Gráfica
+2;INF-325;Programación Virtual
+2;INF-338;Microprocesadores
+2;MAT-391;Seminario II
+2;MAT-223;Sistemas de Procesamiento de Datos
+2;INF-320;Programación Lógica
+2;MAT-236;Estructura de la Información
+2;INF-316;Sistemas de Información Gerencial II
+2;INF-335;Muestreo
+2;INF-398;Taller de Licenciatura I
+2;INF-399;Taller de Licenciatura II
+2;INF-281;Taller de Sistemas de Información
+2;INF-314;Auditoría Informática
+1;MAT-351;Procesos Estocásticos
+2;INF-162;Análisis y Diseño de Sistemas de Información
+2;INF-311;Protocolos de Comunicación
+2;INF-164;Teoría de la Información y Codificación
+1;ADM-216;Sistemas Administrativos
+2;INF-327;Sistemas de Control Automático
+2;INF-315;Planificación y Seg. de los Sist Informáticos
+2;INF-361;Diseño y Análisis de Algoritmos I

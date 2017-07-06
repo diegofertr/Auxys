@@ -12,8 +12,7 @@ class MateriasTableSeeder extends Seeder
      */
     public function run()
     {
-
-        DB::table('materias')->insert([
+        /*DB::table('materias')->insert([
         	'sigla'=> 'inf-112',
         	'descripcion' => 'Organizacion de computadoras'
         	]);
@@ -24,6 +23,6 @@ class MateriasTableSeeder extends Seeder
         DB::table('materias')->insert([
         	'sigla'=> 'inf-142',
         	'descripcion' => 'Fundamentos Digitales'
-        	]);
+        	]);*/
     }
 }

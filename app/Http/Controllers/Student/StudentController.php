@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 use Auxys\Http\Controllers\Controller;
 use Excel;
 use Auxys\Estudiante;
+use Auxys\Materia;
+use Yajra\Datatables\Datatables;
+
+
 class StudentController extends Controller
 {
     /**
@@ -20,12 +24,15 @@ class StudentController extends Controller
             // $file = time().'.'.$request->file->getClientOriginalExtension();
             // $request->file->move(public_path('students'), $file);
             $data = Excel::load($file, function($reader) {
-                    })->setDelimiter(';')->get();
+                    },'UTF-8')->setDelimiter(';')->get();
+            // dd($data);
             if(!empty($data) && $data->count()){
                 $count=0;
                 foreach ($data as $student) {
                     $count++;
-                    $string=$student->last_namesure_namefirst_namedocument_idcodigonombrenotaperiodo;
+                    // $string=$student->last_namesure_namefirst_namedocument_idcodigonombrenotaperiodo;
+                    $string=$student->last_namesure_namefirst_namedocument_idcodigonotacodperiodoperiodo;
+                        ;
                     $attributes = explode(";", $string);
                     $new_student=new Estudiante();
                     $new_student->paterno=$attributes[0];
@@ -33,16 +40,24 @@ class StudentController extends Controller
                     $new_student->nombre=$attributes[2];
                     $new_student->carnet_identidad=$attributes[3];
                     $old_student=$this->save(new Request , $new_student);
-                    $materia_id=rand(1,3);
+                    /*$materia_id=$this->exists($attributes[4]);
                     if($old_student->materias()->where('id','=',$materia_id)->first()){
-                       $old_student->materias()->updateExistingPivot($materia_id,['nota' => $attributes[6],'periodo' => $attributes[7]]);
+                       $old_student->materias()->updateExistingPivot($materia_id,['nota' => $attributes[5],'periodo' => $attributes[7]]);
                     }else{
-                       $old_student->materias()->attach($materia_id,['nota' => $attributes[6],'periodo' => $attributes[7]]);
-                    }
+                       $old_student->materias()->attach($materia_id,['nota' => $attributes[5],'periodo' => $attributes[7]]);
+                    }*/
                 }
             }
             dd($data);
         }
+    }
+    public function exists($sigla)
+    {
+      $old_materia=Materia::where('sigla','=',$sigla)->first();
+      if ($old_materia) {
+        return $old_materia->id;
+      }
+      return 0;
     }
     public function save(Request $request, Estudiante $student )
     {
@@ -59,9 +74,14 @@ class StudentController extends Controller
     }
     public function index()
     {
-        //
+        return view('students.index');
     }
-
+    public function getStudents(Datatables $datatables)
+    {
+        return $datatables->eloquent(Estudiante::select('carnet_identidad', 'nombre','paterno','materno'))
+                          //->addColumn('action', 'hola')
+                          ->make();
+    }
     /**
      * Show the form for creating a new resource.
      *

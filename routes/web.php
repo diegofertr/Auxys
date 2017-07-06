@@ -42,5 +42,7 @@ Route::group(['middleware' => 'auth'], function () {
     //import
     
     Route::get('student/import','Student\StudentController@import');
+    Route::resource('student','Student\StudentController');
     Route::post('importStudents','Student\StudentController@importStudents');
+    Route::get('getStudents','Student\StudentController@getStudents');
 });

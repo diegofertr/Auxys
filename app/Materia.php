@@ -32,4 +32,11 @@ class Materia extends Model
    	{
    		return $this->belongsToMany(Estudiante::class);
    	}
+    public static function exists(Materia $materia)
+    {
+      $old_materia=Materia::where('sigla','=',$materia->sigla)->first();
+      if (!$old_materia) {
+        $materia->save();
+      }
+    }
 }
