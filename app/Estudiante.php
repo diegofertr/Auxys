@@ -3,7 +3,7 @@
 namespace Auxys;
 
 use Illuminate\Database\Eloquent\Model;
-
+use Auxys\Materia;
 class Estudiante extends Model
 {
     //use softDeletes;

@@ -24,9 +24,27 @@ class StudentController extends Controller
             // $file = time().'.'.$request->file->getClientOriginalExtension();
             // $request->file->move(public_path('students'), $file);
             $data = Excel::load($file, function($reader) {
-                    },'UTF-8')->setDelimiter(';')->get();
-            // dd($data);
+                    },'UTF-8')->get();
             if(!empty($data) && $data->count()){
+                $count=0;
+                foreach ($data as $student) {
+                    $count++;
+                    $new_student=new Estudiante();
+                    $new_student->paterno=$student->last_name??'';
+                    $new_student->materno=$student->sure_name??'';
+                    $new_student->nombre=$student->first_name;
+                    $new_student->carnet_identidad=strval($student->document_id);
+                    $old_student=$this->save(new Request , $new_student);
+                    $materia_id=$this->exists($student->codigo);
+                    if($old_student->materias()->where('id','=',$materia_id)->first()){
+                       $old_student->materias()->updateExistingPivot($materia_id,['nota' => $student->nota,'periodo' => $student->codperiodo]);
+                    }else{
+                       $old_student->materias()->attach($materia_id,['nota' => $student->nota,'periodo' => $student->codperiodo]);
+                    }
+                }
+            }
+            //dd($data[0]);
+            /*if(!empty($data) && $data->count()){
                 $count=0;
                 foreach ($data as $student) {
                     $count++;
@@ -40,14 +58,14 @@ class StudentController extends Controller
                     $new_student->nombre=$attributes[2];
                     $new_student->carnet_identidad=$attributes[3];
                     $old_student=$this->save(new Request , $new_student);
-                    /*$materia_id=$this->exists($attributes[4]);
+                    $materia_id=$this->exists($attributes[4]);
                     if($old_student->materias()->where('id','=',$materia_id)->first()){
                        $old_student->materias()->updateExistingPivot($materia_id,['nota' => $attributes[5],'periodo' => $attributes[7]]);
                     }else{
                        $old_student->materias()->attach($materia_id,['nota' => $attributes[5],'periodo' => $attributes[7]]);
-                    }*/
+                    }
                 }
-            }
+            }*/
             dd($data);
         }
     }
