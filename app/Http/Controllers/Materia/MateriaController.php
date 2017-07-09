@@ -1,9 +1,11 @@
 <?php
 
-namespace Auxys\Http\Controllers;
+namespace Auxys\Http\Controllers\Materia;
+
+use Illuminate\Http\Request;
+use Auxys\Http\Controllers\Controller;
 
 use Auxys\Materia;
-use Illuminate\Http\Request;
 use Yajra\Datatables\Datatables;
 
 class MateriaController extends Controller
@@ -23,9 +25,7 @@ class MateriaController extends Controller
         return Datatables::of($materias)
         ->addColumn('action', function ($materia) { return
             '<div class="btn-group">
-              <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myModal">
-                Editar
-              </button>
+              <a href="/materias/'. $materia->id.'" class="btn btn-warning">Editar</a>
               <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span class="caret"></span>
                 <span class="sr-only">Toggle Dropdown</span>
@@ -71,6 +71,22 @@ class MateriaController extends Controller
     public function show($id)
     {
         //
+        $materia = Materia::find($id);
+        // $requisitos=Materia::find($id)->requisitosMateria()->get();
+        // $requisitos_materia = Materia::find($id)->requisitosMateria()->select('materia_id','materia_req_id')->get();
+        // dd($requisitos_materia);
+        // $requisitos_materia_list = ['' => ''];
+        // foreach ($requisitos_materia as $item) {
+        //     $requisitos_materia_list[$item->id] = $item->materia_id;
+        //     // $requisitos_materia_list[$item->id] = $item->materia_req_id;
+        // }
+        return view('materias.show', compact('materia'));
+    }
+
+    public function materiaPrerequisitos(Request $request) {
+        $requisitos_materia = Materia::find($request->id)->requisitosMateria()->select('materia_id','materia_req_id')->get();
+        return Datatables::of($requisitos_materia)
+        ->make(true);
     }
 
     /**
