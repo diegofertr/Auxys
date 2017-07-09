@@ -28,9 +28,10 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('get_convocatoria', array('as'=>'get_convocatoria', 'uses'=>'ConvocatoriaController@dataTables'));
 
     //for materias
-    Route::resource('materias', 'MateriaController');
-    Route::get('getMaterias',['as'=>'getMaterias','uses'=>'MateriaController@getMaterias']);
-    Route::get('materias/deleteM/{id}',['as'=>'deleteM','uses'=>'MateriaController@deleteM']);
+    Route::resource('materias', 'Materia\MateriaController');
+    Route::get('getMaterias',['as'=>'getMaterias','uses'=>'Materia\MateriaController@getMaterias']);
+    Route::get('materias/deleteM/{id}',['as'=>'deleteM','uses'=>'Materia\MateriaController@deleteM']);
+    Route::get('materiaPrerequisitos', ['as'=>'materiaPrerequisitos', 'uses'=>'Materia\MateriaController@materiaPrerequisitos']);
 
     //Please do not remove this if you want adminlte:route and adminlte:link commands to works correctly.
     #adminlte_routes
