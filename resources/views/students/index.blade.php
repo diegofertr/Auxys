@@ -6,11 +6,12 @@ Estudiantes{{-- {{ trans('adminlte_lang::message.home') }} --}}
 Lista de Estudiantes
 @endsection
 @section('main-content')
-    <div class="container-fluid spark-screen">
+<div class="container-fluid spark-screen">
     <div class="row">
+    <a href="{{url('students/create')}}" class="btn btn-success" role="button"><i class="fa fa-plus"></i></a>
     </div>
         <div class="row">
-            <div class="col-md-8 col-md-offset-2">
+            <div class="col-md-12">
                 <div class="row">
                     <div class="col-md-12">
                         <table id="students-table" class="table table-bordered">
@@ -28,7 +29,7 @@ Lista de Estudiantes
                 </div>
             </div>
         </div>
-    </div>
+</div>
 @endsection
 @push('styles')
 <link rel="stylesheet" type="text/css" href="/css/jquery.dataTables.min.css">
@@ -45,3 +46,4 @@ Lista de Estudiantes
         });
     </script>
 @endpush
+
