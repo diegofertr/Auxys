@@ -18,30 +18,25 @@ Route::get('/', function () {
 
 
 Route::group(['middleware' => 'auth'], function () {
-    //    Route::get('/link1', function ()    {
-//        // Uses Auth Middleware
-//    });
+    
 	Route::get('home', 'HomeController@index');
 	Route::resource('convocatoria', 'ConvocatoriaController');
 	// Route::get('get_convocatoria', 'ConvocatoriaController@dataTables');
 
 	Route::get('get_convocatoria', array('as'=>'get_convocatoria', 'uses'=>'ConvocatoriaController@dataTables'));
 
-    //for materias
+    //materias
     Route::resource('materias', 'Materia\MateriaController');
     Route::get('getMaterias',['as'=>'getMaterias','uses'=>'Materia\MateriaController@getMaterias']);
     Route::get('materias/deleteM/{id}',['as'=>'deleteM','uses'=>'Materia\MateriaController@deleteM']);
     Route::get('materiaPrerequisitos', ['as'=>'materiaPrerequisitos', 'uses'=>'Materia\MateriaController@materiaPrerequisitos']);
-
-    //Please do not remove this if you want adminlte:route and adminlte:link commands to works correctly.
-    #adminlte_routes
+    Route::post('add_prerequisite_m', array('as'=>'add_prerequisite_m', 'uses'=> 'Materia\MateriaController@addPrerequisite'));
    
     //for users
     Route::resource('users','User\UserController');
     Route::get('getUsers','User\UserController@getUsers');
 
     //import
-    
     Route::get('student/import','Student\StudentController@import');
     Route::resource('student','Student\StudentController');
     Route::post('importStudents','Student\StudentController@importStudents');

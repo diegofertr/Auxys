@@ -25,13 +25,18 @@ class MateriaController extends Controller
         return Datatables::of($materias)
         ->addColumn('action', function ($materia) { return
             '<div class="btn-group">
-              <a href="/materias/'. $materia->id.'" class="btn btn-warning">Editar</a>
-              <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <a href="/materias/'. $materia->id.'" class="btn btn-success circle">
+                <i class="fa fa-eye"></i>
+              </a>
+              <button type="button" class="btn btn-danger circle dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span class="caret"></span>
                 <span class="sr-only">Toggle Dropdown</span>
               </button>
               <ul class="dropdown-menu">
-                <li><a href="/materias/deleteM/' .$materia->id. '" ><i class="glyphicon glyphicon-minus"></i>Eliminar</a></li>
+                <li><a href="/materias/deleteM/' .$materia->id. '" >
+                    <i class="fa fa-minus"></i> Eliminar
+                    </a>
+                </li>
               </ul>
             </div>';})
         ->make(true);        
@@ -72,20 +77,37 @@ class MateriaController extends Controller
     {
         //
         $materia = Materia::find($id);
-        // $requisitos=Materia::find($id)->requisitosMateria()->get();
-        // $requisitos_materia = Materia::find($id)->requisitosMateria()->select('materia_id','materia_req_id')->get();
-        // dd($requisitos_materia);
-        // $requisitos_materia_list = ['' => ''];
+        // $requisitos_materia = Materia::find($id)->requisitosMateria()->get();
+        // // dd($requisitos_materia[0]->sigla);
+        // $requisitos_list = array('' => '');
         // foreach ($requisitos_materia as $item) {
-        //     $requisitos_materia_list[$item->id] = $item->materia_id;
-        //     // $requisitos_materia_list[$item->id] = $item->materia_req_id;
+        //     $requisitos_list[$item->id] = $item->sigla;
         // }
-        return view('materias.show', compact('materia'));
+        $materias = Materia::all();
+        $materias_list = array('' => '');
+        foreach ($materias as $item) {
+            $materias_list[$item->id] = $item->sigla;
+        }
+        return view('materias.show', compact('materia','materias_list'));
+    }
+
+    public function addPrerequisite(Request $request){
+        $materia = Materia::find($request->materia_id);
+        $materia->requisitosMateria()->attach($request->materia_req_id);
+        return back();
     }
 
     public function materiaPrerequisitos(Request $request) {
-        $requisitos_materia = Materia::find($request->id)->requisitosMateria()->select('materia_id','materia_req_id')->get();
+        $requisitos_materia = Materia::find($request->id)->requisitosMateria()->select('materia_req_id')->get();
         return Datatables::of($requisitos_materia)
+        ->editColumn('materia_req_sigla', function ($materia){
+            $mate = Materia::find($materia->materia_req_id);
+            return $mate->sigla;
+        })
+        ->editColumn('materia_req_desc', function ($materia){
+            $mate = Materia::find($materia->materia_req_id);
+            return $mate->descripcion;
+        })
         ->make(true);
     }
 

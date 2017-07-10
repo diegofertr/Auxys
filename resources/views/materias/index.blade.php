@@ -6,39 +6,44 @@ Materias
 Lista de materias
 @endsection
 @section('main-content')
-<div class="container-fluid spark-screen">
-    <div class="row">
-    <a href="{{url('materias/create')}}" class="btn btn-success" role="button"><i class="fa fa-plus"></i></a>
+<div class="box box-primary">
+  <div class="box-header with-border">
+    <h3 class="box-title"></h3>
+    <div class="box-tools pull-right">
+        <a href="{{url('materias/create')}}" class="btn btn-info circle" role="button"><i class="fa fa-plus"></i></a>
     </div>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="row">
-                    <div class="col-md-12">
-                        <table id="materias-table" class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>Id</th>
-                                    <th>Sigla</th>
-                                    <th>Descripción</th>
-                                    <th>Acción</th>
-                                </tr>
-                            </thead>
-                        </table>
-                    </div>
-                </div>
-            </div>
+  </div>
+  <div class="box-body">
+    <div class="row">
+        <div class="col-md-12">
+            <table id="materias-table" class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Sigla</th>
+                        <th>Descripción</th>
+                        <th>Acción</th>
+                    </tr>
+                </thead>
+            </table>
         </div>
     </div>
+  </div>
+</div>
 @endsection
 @push('styles')
 <link rel="stylesheet" type="text/css" href="/css/jquery.dataTables.min.css">
+<style>
+    .circle {
+        border-radius: 50px;
+    }
+</style>
 @endpush
 @push('scripts')
 <script type="text/javascript" src="/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript">
         $(function () {
             var oTable = $('#materias-table').DataTable({
-            "dom": '<"top">t<"bottom"p>',
             processing: true,
             serverSide: true,
             ajax: {

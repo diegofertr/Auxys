@@ -3,7 +3,7 @@
 Materias{{-- {{ trans('adminlte_lang::message.home') }} --}}
 @endsection
 @section('contentheader_title')
-Lista de materias
+Nueva Materia
 @endsection
 @section('main-content')
 <div class="container-fluid spark-screen">
