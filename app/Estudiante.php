@@ -28,7 +28,7 @@ class Estudiante extends Model
 	}
 	public function materias()
 	{
-		return $this->belongsTomany(Materia::class);
+		return $this->belongsTomany(Materia::class)->withPivot('nota', 'periodo');
 	}
 
 	public function requisitosC(){

@@ -30,7 +30,7 @@ class Materia extends Model
    	}
    	public function estudiantes()
    	{
-   		return $this->belongsToMany(Estudiante::class);
+   		return $this->belongsToMany(Estudiante::class)->withPivot('nota', 'periodo');
    	}
     public static function exists(Materia $materia)
     {
