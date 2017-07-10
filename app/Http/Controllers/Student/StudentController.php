@@ -94,11 +94,26 @@ class StudentController extends Controller
     {
         return view('students.index');
     }
-    public function getStudents(Datatables $datatables)
+    public function getStudents()
     {
-        return $datatables->eloquent(Estudiante::select('carnet_identidad', 'nombre','paterno','materno'))
-                          //->addColumn('action', 'hola')
-                          ->make();
+        $students=Estudiante::select('carnet_identidad', 'nombre','paterno','materno','id');
+        return Datatables::of($students)
+                          ->addColumn('action', function ($student)
+                          {
+                              return 
+                              '<div class="btn-group">
+                              <a href="'.url('student', $student).'" role="button" class="btn bg-olive"><i class="fa fa-eye"></i></a>
+                              <button type="button" class="btn bg-olive dropdown-toggle" data-toggle="dropdown">
+                                <span class="caret"></span>
+                                <span class="sr-only">Toggle Dropdown</span>
+                              </button>
+                              <ul class="dropdown-menu" role="menu">
+                                <li><a href="#"><i class="fa fa-pencil"></i>Editar</a></li>
+                                <li><a href="#"><i class="fa fa-minus"></i>Eliminar</a></li>
+                              </ul>
+                              </div>';
+                          })
+                          ->make(true);
     }
     /**
      * Show the form for creating a new resource.
@@ -129,7 +144,9 @@ class StudentController extends Controller
      */
     public function show($id)
     {
-        //
+        $student=Estudiante::find($id);
+        $materias=$student->materias;
+        return view('students.show',compact('student','materias'));
     }
 
     /**

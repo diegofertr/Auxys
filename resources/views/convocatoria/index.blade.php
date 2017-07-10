@@ -1,17 +1,15 @@
 @extends('adminlte::layouts.app')
-
 @section('htmlheader_title')
-	{{ trans('adminlte_lang::message.home') }}
+Convocatoria
 @endsection
-
-
+@section('contentheader_title')
+Convocatoria
+@endsection
 @section('main-content')
 	<div class="container-fluid spark-screen">
 		<div class="row">
 			<div class="col-md-8 col-md-offset-2">
-
-
-				     <div class="row">
+				     {{-- <div class="row">
                         <div class="col-md-12">
                             <table class="table table-bordered table-hover" id="economic_complements-table">
                                 <thead>
@@ -28,13 +26,12 @@
                                 </thead>
                             </table>
                         </div>
-                    </div>
+                    </div> --}}
 
 				<!-- Default box -->
 				<div class="box">
 					<div class="box-header with-border">
 						<h3 class="box-title">Convocatoria</h3>
-
 						<div class="box-tools pull-right">
 							<button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
 								<i class="fa fa-minus"></i></button>
@@ -44,6 +41,7 @@
 					</div>
 					<div class="box-body">
 						Esta es la pagina de convocatoria!!!!!!!!!!!!!!!!
+                        <a href="{{route('convocatoria.create')}}" role="button" class="btn btn-info">Crear Convocatoria</a>
 					</div>
 					<!-- /.box-body -->
 				</div>

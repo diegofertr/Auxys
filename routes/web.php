@@ -41,4 +41,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('student','Student\StudentController');
     Route::post('importStudents','Student\StudentController@importStudents');
     Route::get('getStudents','Student\StudentController@getStudents');
+    //convocatoria
+    Route::get('print_announcement','ConvocatoriaController@print_announcement');
 });
