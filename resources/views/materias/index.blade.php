@@ -16,7 +16,7 @@ Lista de materias
   <div class="box-body">
     <div class="row">
         <div class="col-md-12">
-            <table id="materias-table" class="table table-bordered">
+            <table id="materias-table" class="table table-bordered table-hover table-striped">
                 <thead>
                     <tr>
                         <th>Id</th>
@@ -36,6 +36,13 @@ Lista de materias
 <style>
     .circle {
         border-radius: 50px;
+    }
+    #materias-table thead th{
+        background: rgba(12,122,191,.8);
+        color:#fff;
+    }
+    #materias-table tbody tr:hover{
+        background: rgba(109,109,109,.3);
     }
 </style>
 @endpush

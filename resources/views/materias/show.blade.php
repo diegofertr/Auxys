@@ -89,6 +89,13 @@ Materia
     .circle {
         border-radius: 50%;
     }
+    #prerequisitos-table thead th{
+        background: rgba(12,122,191,.8);
+        color:#fff;
+    }
+    #prerequisitos-table tbody tr:hover{
+        background: rgba(109,109,109,.3);
+    }
 </style>
 @endpush
 @push('scripts')
