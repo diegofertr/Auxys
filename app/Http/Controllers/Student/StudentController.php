@@ -115,6 +115,20 @@ class StudentController extends Controller
                           })
                           ->make(true);
     }
+
+    public function materiaStudent(Request $request) {
+        $student=Estudiante::find($request->id);
+        $materias=$student->materias()->select('id','sigla','descripcion')->get();
+        return Datatables::of($materias)
+        ->editColumn('nota', function ($materia){
+            // return '<span class="badge bg-green" style="font-size:1.2em">.'$materia->pivot->nota.'</span>';
+            return $materia->pivot->nota;
+        })
+        ->editColumn('observacion', function($materia) {
+            return 'Aprobado';
+        })
+        ->make(true);
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -145,8 +159,9 @@ class StudentController extends Controller
     public function show($id)
     {
         $student=Estudiante::find($id);
-        $materias=$student->materias;
-        return view('students.show',compact('student','materias'));
+        // $materias=$student->materias;
+        // return view('students.show',compact('student','materias'));   
+        return view('students.show',compact('student'));   
     }
 
     /**

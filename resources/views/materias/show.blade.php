@@ -80,6 +80,7 @@ Materia
     </div>
   </div>
 </div>
+{{-- End Modal --}}
 
 @endsection
 @push('styles')

@@ -20,10 +20,10 @@ Route::get('/', function () {
 Route::group(['middleware' => 'auth'], function () {
     
 	Route::get('home', 'HomeController@index');
-	Route::resource('convocatoria', 'ConvocatoriaController');
+	Route::resource('convocatoria', 'Convocatoria\ConvocatoriaController');
 	// Route::get('get_convocatoria', 'ConvocatoriaController@dataTables');
 
-	Route::get('get_convocatoria', array('as'=>'get_convocatoria', 'uses'=>'ConvocatoriaController@dataTables'));
+	Route::get('get_convocatoria', array('as'=>'get_convocatoria', 'uses'=>'Convocatoria\ConvocatoriaController@dataTables'));
 
     //materias
     Route::resource('materias', 'Materia\MateriaController');
@@ -41,6 +41,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('student','Student\StudentController');
     Route::post('importStudents','Student\StudentController@importStudents');
     Route::get('getStudents','Student\StudentController@getStudents');
+    Route::get('cumpleRequisitos','Student\StudentController@cumpleRequisitos');
+    Route::get('materiaStudent', ['as'=>'materiaStudent', 'uses'=>'Student\StudentController@materiaStudent']);
     //convocatoria
-    Route::get('print_announcement','ConvocatoriaController@print_announcement');
+    Route::get('print_announcement','Convocatoria\ConvocatoriaController@print_announcement');
+    Route::resource('requisito_c', 'Convocatoria\RequisitosConvocatoriaController');
 });

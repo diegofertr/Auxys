@@ -1,12 +1,15 @@
 <?php
 
-namespace Auxys\Http\Controllers;
+namespace Auxys\Http\Controllers\Convocatoria;
 
 use Illuminate\Http\Request;
+use Auxys\Http\Controllers\Controller;
 use Auxys\convocatoria;
 use Auxys\Materia;
+use Auxys\RequisitosConvocatoria;
 use PDF;
 use Carbon\Carbon;
+
 class ConvocatoriaController extends Controller
 {
     /**
@@ -29,7 +32,6 @@ class ConvocatoriaController extends Controller
         })
         ->make(true);
     }
-
 
     /**
      * Show the form for creating a new resource.
@@ -96,6 +98,7 @@ class ConvocatoriaController extends Controller
     {
         //
     }
+
     public function print_announcement()
     {   
         setlocale(LC_ALL, "es_ES.UTF-8");
@@ -106,8 +109,9 @@ class ConvocatoriaController extends Controller
         $semester='Segundo';
         $deadline_date=strftime("%e del mes de %B de %Y",strtotime(Carbon::now()->addWeeks(3)));
         $deadline_time=Carbon::now()->toTimeString();
+        $requisitos = RequisitosConvocatoria::all();
         $materias=Materia::all();
-        $view =  \View::make('convocatoria.print_convocatoria', compact('materias', 'current_date', 'number_announcement','year','period','semester','deadline_date','deadline_time'))->render();
+        $view =  \View::make('convocatoria.print_convocatoria', compact('materias', 'current_date', 'number_announcement','year','period','semester','deadline_date','deadline_time', 'requisitos'))->render();
         $pdf = \App::make('dompdf.wrapper');
         $pdf->loadHTML($view);
         return $pdf->stream('invoice');

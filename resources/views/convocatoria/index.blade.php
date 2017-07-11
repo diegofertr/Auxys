@@ -9,30 +9,14 @@ Convocatoria
 	<div class="container-fluid spark-screen">
 		<div class="row">
 			<div class="col-md-8 col-md-offset-2">
-				     {{-- <div class="row">
-                        <div class="col-md-12">
-                            <table class="table table-bordered table-hover" id="economic_complements-table">
-                                <thead>
-                                    <tr class="success">
-                                        <th class="text-center"><div data-toggle="tooltip" data-placement="top" data-container="body" data-original-title="Número de Trámite">Número</div></th>
-                                        <th class="text-left"><div data-toggle="tooltip" data-placement="top" data-container="body" data-original-title="Concepto de Cobro">Número de Carnet</div></th>
-                                        <th class="text-left"><div data-toggle="tooltip" data-placement="top" data-container="body" data-original-title="Nombre de Afiliado">Nombre de Beneficiario</div></th>
-                                        <th class="text-left"><div data-toggle="tooltip" data-placement="top" data-container="body" data-original-title="Total a Pagar">Fecha Emisión</div></th>
-                                        <th clas
-                                        s="text-left"><div data-toggle="tooltip" data-placement="top" data-container="body" data-original-title="Estado">Estado</div></th>
-                                        <th class="text-left"><div data-toggle="tooltip" data-placement="top" data-container="body" data-original-title="Fecha de Pago">Modalidad</div></th>
-                                        <th class="text-center">Acción</th>
-                                    </tr>
-                                </thead>
-                            </table>
-                        </div>
-                    </div> --}}
-
 				<!-- Default box -->
 				<div class="box">
 					<div class="box-header with-border">
 						<h3 class="box-title">Convocatoria</h3>
 						<div class="box-tools pull-right">
+              <button type="button" class="btn btn-info circle" data-toggle="modal" data-target="#prerequisiteModal">
+                <i class="fa fa-plus"></i>
+              </button>
 							<button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
 								<i class="fa fa-minus"></i></button>
 							<button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
@@ -41,7 +25,7 @@ Convocatoria
 					</div>
 					<div class="box-body">
 						Esta es la pagina de convocatoria!!!!!!!!!!!!!!!!
-                        <a href="{{route('convocatoria.create')}}" role="button" class="btn btn-info">Crear Convocatoria</a>
+            <a href="{{route('convocatoria.create')}}" role="button" class="btn btn-info">Crear Convocatoria</a>
 					</div>
 					<!-- /.box-body -->
 				</div>
@@ -50,9 +34,43 @@ Convocatoria
 			</div>
 		</div>
 	</div>
+
+<!-- Modal Crear-Pre-requisito -->
+<div class="modal fade" id="prerequisiteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+    {!! Form::open(['url' => 'requisito_c']) !!}
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">
+            Crear pre-requisitos de convocatoria
+        </h4>
+      </div>
+      <div class="modal-body">
+        {!! Form::token() !!}
+        <div class="form-group">
+          {!! Form::label('nombre', 'Nombre', ['class' => 'control-label']) !!}
+          {!! Form::text('nombre', null, ['class'=> 'form-control', 'required' => 'required']) !!}
+            
+        </div>
+        <div class="form-group">
+          {!! Form::label('descripcion', 'Descripcion', ['class' => 'control-label']) !!}
+          {!! Form::textarea('descripcion', null, ['class' => 'form-control', 'rows' => 3, 'required' => 'required']) !!}
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-warning" data-dismiss="modal">
+            Cancelar
+        </button>
+        {!! Form::submit('Guardar pre-requisito',['class'=>"btn btn-primary"]) !!}
+      </div>
+        {!! Form::close() !!}
+    </div>
+  </div>
+</div>
+{{-- End Modal --}}
+
 @endsection
-
-
 @push('scripts')
 	
 	<script type="text/javascript">

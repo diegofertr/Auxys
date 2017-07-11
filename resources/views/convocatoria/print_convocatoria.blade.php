@@ -79,36 +79,11 @@ De acuerdo a la CIRCULAR  D.B.S./DBA/CIR No, 002/2016, los postulantes deberán 
 </p>
 <p>
 <ol>
-	<li>
-		Nota dirigida al Decano de la Facultad, indicando la asignatura a la   que postula.
-	</li>
-	<li>
-		Curriculum Vitae, avalado documentalmente. 
-	</li>
-	<li>
-		Fotocopia de matrícula universitaria Gestión 2017 y Cédula de Identidad (3 ejemplares de cada uno).
-	</li>
-	<li>
-		Record Académico firmado y sellado por Kardex o Certificado que acredite haber vencido las materias del periodo  al  que corresponde la asignatura de acuerdo al Art. 8.
-	</li>
-	<li>
-		Certificado que acredite la fecha de culminación del Plan de Estudios,  expedido por la Jefatura de la Carrera, (si el postulante hubiese concluido  con  el Plan  de Estudios).
-	</li>
-	<li>
-		Certificación del Área Desconcentrada de no tener deuda pendiente con la Universidad, actualizado.
-	</li>
-	<li>
-		Formulario de Registro al SIGEP (SISTEMA DE GESTION PUBLICA).
-	</li>
-	<li>
-		Formulario de datos Personales del Auxiliar.
-	</li>
-	<li>
-		Declaración Jurada de no haber sido auxiliar de docencia hasta dos gestiones académicas en la misma asignatura.
-	</li>
-	<li>
-		Declaración Jurada de no tener pendientes con la Universidad, ni proceso Universitario ejecutoriado		
-	</li>
+	@foreach ($requisitos as $requisito)
+		<li>
+			{{ $requisito->descripcion }}
+		</li>
+	@endforeach
 </ol>
 </p>
 <p class="bold italic">	

@@ -28,6 +28,7 @@ class Materia extends Model
    	public function requisitosMateria(){
 		return $this->belongsToMany('Auxys\Materia', 'requisitos_m','materia_id','materia_req_id');
    	}
+    
    	public function estudiantes()
    	{
    		return $this->belongsToMany(Estudiante::class)->withPivot('nota', 'periodo');
