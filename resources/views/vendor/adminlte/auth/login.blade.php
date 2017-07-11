@@ -3,15 +3,14 @@
 @section('htmlheader_title')
     Log in
 @endsection
-
 @section('content')
     <body class="hold-transition login-page">
     <div id="app" v-cloak>
         <div class="login-box">
             <div class="login-logo">
-                <a href="{{ url('/home') }}"><b>EYCY</b> auxys</a>
-            </div><!-- /.login-logo -->
-
+                <a href="{{ url('/home') }}"><b>Auxys</b> </a>
+                <p><h3>Sistema de Auxiliatura</h3></p>
+            </div>
             @if (count($errors) > 0)
                 <div class="alert alert-danger">
                     <strong>Whoops!</strong> {{ trans('adminlte_lang::message.someproblems') }}<br><br>
@@ -24,7 +23,7 @@
             @endif
 
             <div class="login-box-body">
-                <p class="login-box-msg"> {{ trans('adminlte_lang::message.siginsession') }} </p>
+                <p class="login-box-msg leter"> Inicia sesión para acceder al sistema </p>
                 <form action="{{ url('/login') }}" method="post">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     {{-- <login-input-field
@@ -40,39 +39,18 @@
                         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
                     </div>
                     <div class="row">
-                        <div class="col-xs-6">
-                            <div class="checkbox icheck">
-                                <label>
-                                    <input style="display:none;" type="checkbox" name="remember"> {{ trans('adminlte_lang::message.remember') }}
-                                </label>
-                            </div>
-                        </div><!-- /.col -->
+                        <div class="col-xs-6"></div>
                         <div class="col-xs-6">
                             <button type="submit" class="btn btn-primary btn-block btn-flat">{{ trans('adminlte_lang::message.buttonsign') }}</button>
-                        </div><!-- /.col -->
+                        </div>
                     </div>
                 </form>
-
-                {{-- @include('adminlte::auth.partials.social_login') --}}
-
-                <a href="{{ url('/password/reset') }}">{{ trans('adminlte_lang::message.forgotpassword') }}</a><br>
-                <a href="{{ url('/register') }}" class="text-center">{{ trans('adminlte_lang::message.registermember') }}</a>
-
-            </div><!-- /.login-box-body -->
-
-        </div><!-- /.login-box -->
+            </div>
+        </div>
     </div>
     @include('adminlte::layouts.partials.scripts_auth')
 
-    <script>
-      $(function () {
-        $('input').iCheck({
-          checkboxClass: 'icheckbox_square-blue',
-          radioClass: 'iradio_square-blue',
-          increaseArea: '20%' // optional
-        });
-      });
-    </script>
+    
     </body>
 
 @endsection

@@ -93,7 +93,11 @@ class MateriaController extends Controller
 
     public function addPrerequisite(Request $request){
         $materia = Materia::find($request->materia_id);
-        $materia->requisitosMateria()->attach($request->materia_req_id);
+        // dd($request);
+        foreach ($request->requisites as $item) {
+            $materia->requisitosMateria()->attach($item);
+        }
+        // $materia->requisitosMateria()->attach($request->materia_req_id);
         return back();
     }
 

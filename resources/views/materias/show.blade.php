@@ -66,7 +66,7 @@ Materia
         {!! Form::label('materia', 'Materias', ['']) !!}
 
         <div class="form-group">
-        {!! Form::select('materia_req_id', $materias_list, ' ', ['class' => 'col-md-2 combobox form-control selectpicker','required' => 'required', 'multiple']) !!}
+        {!! Form::select('requisites[]', $materias_list, ' ', ['class' => 'col-md-2 combobox form-control selectpicker','id' => 'prereselect','required' => 'required', 'multiple']) !!}
         </div> 
         {!! Form::hidden('materia_id', $materia->id) !!}
       </div>
@@ -85,6 +85,7 @@ Materia
 @push('styles')
 <link rel="stylesheet" type="text/css" href="/css/jquery.dataTables.min.css">
 <link rel="stylesheet" type="text/css" href="/css/bootstrap-select.min.css">
+{{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css"> --}}
 <style>
     .circle {
         border-radius: 50%;
@@ -101,6 +102,7 @@ Materia
 @push('scripts')
 <script type="text/javascript" src="/js/jquery.dataTables.min.js"></script>
 <script src="/js/bootstrap-select.min.js"></script>
+{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.js"></script> --}}
 <script type="text/javascript">
     $(function () {
         var oTable = $('#prerequisitos-table').DataTable({
