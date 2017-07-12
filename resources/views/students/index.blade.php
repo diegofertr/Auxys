@@ -6,38 +6,34 @@ Estudiantes{{-- {{ trans('adminlte_lang::message.home') }} --}}
 Lista de Estudiantes
 @endsection
 @section('main-content')
-<div class="container-fluid spark-screen">
-    <div class="row">
-    <a href="{{url('students/create')}}" class="btn btn-success" role="button"><i class="fa fa-plus"></i></a>
+<div class="box">
+  <div class="box-header with-border">
+    <h3 class="box-title"></h3>
+    <div class="box-tools pull-right">
+      <a href="{{url('students/create')}}" class="btn btn-success" role="button">
+      <i class="fa fa-plus"></i></a>
+      <a href="{{url('student/import')}}" class="btn btn-info" data-toggle="tooltip" data-placement="top" title="Importar Estudiantes"><i class='glyphicon glyphicon-import '></i></a>
     </div>
-        <div class="row">
-        <div class="col-md-12">
-            <div class="box">
-                <div class="box-header">
-                </div>
-                <div class="box-body">
-                <div class="col-md-12 col-lg-12 col-sm-12">
-                <div class="table-responsive">
-                  <table id="students-table" class="table  table-bordered table-hover table-striped">
-                    <thead>
-                    <tr>
-                      <th>Ci</th>
-                      <th>Nombre</th>
-                      <th>Ap. Paterno</th>
-                      <th>Ap. Materno</th>
-                      <th>Opciones</th>
-                    </tr>
-                    </thead>
-                    <tbody>                           
-                    </tbody>
-                  </table>
-                </div>
-                </div>
-                </div>
-            </div>
-        </div>
-
-        </div>
+  </div>
+  <div class="box-body">
+      <div class="col-md-12 col-lg-12 col-sm-12">
+        <div class="table-responsive">
+            <table id="students-table" class="table  table-bordered table-hover table-striped">
+            <thead>
+            <tr>
+                <th>Ci</th>
+                <th>Nombre</th>
+                <th>Ap. Paterno</th>
+                <th>Ap. Materno</th>
+                <th>Opciones</th>
+            </tr>
+            </thead>
+            <tbody>                           
+            </tbody>
+            </table>
+          </div>
+      </div>
+  </div>
 </div>
 @endsection
 @push('styles')
