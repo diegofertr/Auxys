@@ -63,10 +63,10 @@ Materia
       </div>
       <div class="modal-body">
         {!! Form::token() !!}
-        {!! Form::label('materia', 'Materias', ['']) !!}
+        {!! Form::label('materia', 'Materias', ['for' => 'id_label_multiple']) !!}
 
         <div class="form-group">
-        {!! Form::select('requisites[]', $materias_list, ' ', ['class' => 'col-md-2 combobox form-control selectpicker','id' => 'prereselect','required' => 'required', 'multiple']) !!}
+        {!! Form::select('requisites[]', $materias_list, '  ', ['class' => 'col-md-6 js-example-multiple js-states form-control', 'id' => 'id_label_multiple','required' => 'required', 'multiple', 'style'=>'width: 75%' ]) !!}
         </div> 
         {!! Form::hidden('materia_id', $materia->id) !!}
       </div>
@@ -115,6 +115,9 @@ Materia
             { data: 'materia_req_desc', name: 'materia_req_desc'},
             // { data: 'action', name: 'action'}
             ]
+        });
+        $(".js-example-multiple").select2({
+            
         });
     });
 </script>
