@@ -149,6 +149,10 @@ class StudentController extends Controller
             return back();
         }
     }
+
+    public function postulants(){
+      return view('postulants.index');
+    }
     /**
      * Show the form for creating a new resource.
      *

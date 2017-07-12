@@ -45,6 +45,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('cumpleRequisitos','Student\StudentController@cumpleRequisitos');
     Route::get('materiaStudent', ['as'=>'materiaStudent', 'uses'=>'Student\StudentController@materiaStudent']);
     Route::post('cumple_requisito', array('as'=>'cumple_requisito', 'uses'=> 'Student\StudentController@cumpleRequisito'));
+    Route::get('postulants', 'Student\StudentController@postulants');
     
     //convocatoria
     Route::get('print_announcement','Convocatoria\ConvocatoriaController@print_announcement');

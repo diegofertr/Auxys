@@ -6,13 +6,16 @@ Estudiantes{{-- {{ trans('adminlte_lang::message.home') }} --}}
 Lista de Estudiantes
 @endsection
 @section('main-content')
-<div class="box">
+<div class="box box-primary">
   <div class="box-header with-border">
     <h3 class="box-title"></h3>
     <div class="box-tools pull-right">
-      <a href="{{url('students/create')}}" class="btn btn-success" role="button">
+      {{-- <a href="{{url('student/import')}}" class="btn btn-info" data-toggle="tooltip" data-placement="left" title="Importar Estudiantes"><i class='glyphicon glyphicon-import '></i></a> --}}
+      <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">
+        <i class='glyphicon glyphicon-import '></i>
+      </button>
+      <a href="{{url('students/create')}}" class="btn btn-success" role="button"  data-toggle="tooltip" data-placement="top" title="Crear Estudiante">
       <i class="fa fa-plus"></i></a>
-      <a href="{{url('student/import')}}" class="btn btn-info" data-toggle="tooltip" data-placement="top" title="Importar Estudiantes"><i class='glyphicon glyphicon-import '></i></a>
     </div>
   </div>
   <div class="box-body">
@@ -35,6 +38,32 @@ Lista de Estudiantes
       </div>
   </div>
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Importar nuevos datos de los estudiantes</h4>
+      </div>
+      {!!Form::open(['url' => 'importStudents','method'=>'POST', 'files' => true])!!}
+      <div class="modal-body">
+        <div class="container-fluid spark-screen">
+            <div class="row">
+            {!!Form::file('file', ['class' => 'form-control-file'])!!}
+            </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        {!!Form::submit('Importar', ['class'=>"btn btn-primary"])!!}
+      </div>
+      {!!Form::close()!!}
+    </div>
+  </div>
+</div>
+{{-- End Modal --}}
 @endsection
 @push('styles')
 <link rel="stylesheet" type="text/css" href="/css/jquery.dataTables.min.css">

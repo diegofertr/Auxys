@@ -12,15 +12,7 @@
             <li><a href="/convocatoria"><i class='fa fa-file-text-o'></i> <span>Convocatorias</span></a></li>
             <li><a href="/materias"><i class='fa fa-book'></i> <span>Materias</span></a></li>
             <li><a href="/student"><i class='fa fa-graduation-cap'></i> <span>Estudiantes</span></a></li>
-
-            <li><a href="{{url('student/import')}}"><i class='glyphicon glyphicon-import '></i> <span>Importar estudiantes</span></a></li>
-            {{-- <li class="treeview">
-                <a href="#"><i class='fa fa-link'></i> <span>{{ trans('adminlte_lang::message.multilevel') }}</span> <i class="fa fa-angle-left pull-right"></i></a>
-                <ul class="treeview-menu">
-                    <li><a href="#">{{ trans('adminlte_lang::message.linklevel2') }}</a></li>
-                    <li><a href="#">{{ trans('adminlte_lang::message.linklevel2') }}</a></li>
-                </ul>
-            </li> --}}
+            <li><a href="/postulants"><i class="fa fa-users"></i> <span>Postulantes</span></a></li>
         </ul><!-- /.sidebar-menu -->
     </section>
     <!-- /.sidebar -->
