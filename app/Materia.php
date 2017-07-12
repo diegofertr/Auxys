@@ -15,8 +15,9 @@ class Materia extends Model
 	protected $dates = ['deleted_at'];
 
 	protected $fillalbe = [
-           'sigla',
-            'descripcion'              
+    'sigla',
+    'descripcion',              
+    'semestre_id'              
 	];
 	protected $guarded = ['id'];
 

@@ -41,19 +41,21 @@ class ImportarMaterias extends Command
         global $results;
         $password = $this->secret('Ingrese la contrasenia');
         if ($password == 'eycy') {
-            $path = $this->choice('Ingrese la ruta del archivo: ', ['zechus_materias.csv', 'materias.csv']);
+            $path = $this->choice('Ingrese la ruta del archivo: ', ['zechus_materias.csv']);
             $this->info('Importando...');
             Excel::load('/public/import/'.$path, function($reader) {
                 global $results;
                 $results = collect($reader->get());
-            },'UTF-8');
+            });
             $bar = $this->output->createProgressBar(count($results));
             foreach ($results as $materia) {
-                $string=$materia->id_plan_estudiocodigonombre;
+                $string=$materia->codigonombrenivelnombre;
+                //$string=$materia->id_plan_estudiocodigonombre;
                 $attributes = explode(";", $string);
                 $m=new Materia();
-                $m->sigla=$attributes[1];
-                $m->descripcion=$attributes[2];
+                $m->sigla=$attributes[0];
+                $m->descripcion=$attributes[1];
+                $m->semestre_id=$attributes[2];
                 Materia::exists($m);
                 $bar->advance();
             }

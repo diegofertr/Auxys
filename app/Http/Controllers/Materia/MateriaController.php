@@ -154,4 +154,17 @@ class MateriaController extends Controller
         $materia->delete();
         return back();
     }
+    public function getListMaterias(Request $request)
+    {
+        $term = trim($request->term);
+        if (empty($term)) {
+            return response()->json([]);
+        }
+        $materias = Materia::where('sigla','like','%'.$term.'%')->get();
+        $formatted_materias = [];
+        foreach ($materias as $materia) {
+            $formatted_materias[] = ['id' => $materia->id, 'text' => $materia->sigla];
+        }
+        return response()->json($formatted_materias);
+    }
 }

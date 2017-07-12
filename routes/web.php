@@ -31,6 +31,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('materias/deleteM/{id}',['as'=>'deleteM','uses'=>'Materia\MateriaController@deleteM']);
     Route::get('materiaPrerequisitos', ['as'=>'materiaPrerequisitos', 'uses'=>'Materia\MateriaController@materiaPrerequisitos']);
     Route::post('add_prerequisite_m', array('as'=>'add_prerequisite_m', 'uses'=> 'Materia\MateriaController@addPrerequisite'));
+    Route::get('get_list_materias', array('as'=>'get_list_materias', 'uses'=> 'Materia\MateriaController@getListMaterias'));
    
     //for users
     Route::resource('users','User\UserController');

@@ -29,10 +29,17 @@
           $table->softDeletes();
       });
 
+        Schema::create('semestres', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('nombre');
+            $table->timestamps();
+        });
         Schema::create('materias', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('sigla');
             $table->string('descripcion');
+            $table->bigInteger('semestre_id')->unsigned();
+            $table->foreign('semestre_id')->references('id')->on('semestres');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -140,6 +147,7 @@
         Schema::dropIfExists('requisitos_c');
         Schema::dropIfExists('convocatoria_materia');
         Schema::dropIfExists('materias');
+        Schema::dropIfExists('semestres');
         Schema::dropIfExists('convocatorias');
     }
 }
