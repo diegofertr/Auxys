@@ -8,7 +8,7 @@ Estudiante: {{$estudiante->nombre}} {{$estudiante->paterno}} {{$estudiante->mate
 @section('main-content')
 	<div class="info-box">
 	<a href="/student/{{ $estudiante->id }}">
-	  <span class="info-box-icon bg-red">
+	  <span class="info-box-icon bg-green">
 	  		<i class="fa fa-arrow-left"></i>
 	  </span></a>
   <div class="info-box-content">
