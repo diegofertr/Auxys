@@ -120,14 +120,34 @@ class StudentController extends Controller
         $student=Estudiante::find($request->id);
         $materias=$student->materias()->select('id','sigla','descripcion')->get();
         return Datatables::of($materias)
-        ->editColumn('nota', function ($materia){
-            // return '<span class="badge bg-green" style="font-size:1.2em">.'$materia->pivot->nota.'</span>';
-            return $materia->pivot->nota;
+        ->editColumn('action', function ($materia){
+            return '<span class="badge bg-green" style="font-size:1.2em">'.$materia->pivot->nota.'</span>';
         })
         ->editColumn('observacion', function($materia) {
-            return 'Aprobado';
+            return  'Aprobado  '.$materia->pivot->periodo.'';
         })
         ->make(true);
+    }
+
+    public function cumpleRequisito(Request $request){
+        $estudiante = Estudiante::find($request->estudiante_id);
+        $materia = Materia::find($request->materia);
+        $cumple = false;
+        // $requisitos = $materia->requisitosMateria()->get();
+        $requisitos_materia = Materia::find($request->materia)->requisitosMateria()->select('materia_req_id')->get();
+        $aproveds=$estudiante->materias;
+        foreach ($aproveds as $aproved) {
+            foreach ($requisitos_materia as $requisito) {
+                if ($aproved->id == $requisito->materia_req_id) {
+                    $cumple = true;
+                }
+            }
+        }
+        if ($cumple) {
+            return view('students.cumple', compact('estudiante'));
+        } else {
+            return back();
+        }
     }
     /**
      * Show the form for creating a new resource.
@@ -159,9 +179,14 @@ class StudentController extends Controller
     public function show($id)
     {
         $student=Estudiante::find($id);
+        $materias = Materia::all();
+        $materias_list = array('' => '');
+        foreach ($materias as $item) {
+            $materias_list[$item->id] = $item->sigla;
+        }
         // $materias=$student->materias;
         // return view('students.show',compact('student','materias'));   
-        return view('students.show',compact('student'));   
+        return view('students.show',compact('student','materias_list'));   
     }
 
     /**

@@ -12,7 +12,9 @@ Estudiante: {{$student->nombre}} {{$student->paterno}} {{$student->materno}} - {
 	    <h3 class="box-title">SEMESTRE</h3>
 	    <div class="box-tools pull-right">
 	    	{{-- code --}}
-	    	<a href="#{{-- {{url('materias/create')}} --}}" class="btn btn-info circle" role="button"><i class="fa fa-plus"></i> Postular</a>
+	    	<button type="button" class="btn btn-info circle" data-toggle="modal" data-target="#prerequisiteModal">
+          <i class="fa fa-plus"> Postular</i>
+        </button>
 	    </div>
 	  </div>
 	  <div class="box-body">
@@ -35,6 +37,40 @@ Estudiante: {{$student->nombre}} {{$student->paterno}} {{$student->materno}} - {
 	</div>
 
 </div>
+
+<!-- Modal Crear-Pre-requisito -->
+<div class="modal fade" id="prerequisiteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+    {{-- {!! Form::open(['url' => 'prerequisites']) !!} --}}
+    {!! Form::open(['method' => 'POST', 'route' => ['cumple_requisito'], 'class' => 'form-horizontal']) !!}
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">
+            Postular a Auxiliatura
+        </h4>
+      </div>
+      <div class="modal-body">
+        {!! Form::token() !!}
+        {!! Form::label('materia', 'Materia', ['']) !!}
+
+        <div class="form-group">
+        {!! Form::select('materia', $materias_list, ' ', ['class' => 'col-md-2 combobox form-control','id' => 'prereselect','required' => 'required']) !!}
+        </div> 
+        {!! Form::hidden('estudiante_id', $student->id) !!}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-warning" data-dismiss="modal">
+            Cancelar
+        </button>
+        {!! Form::submit('Verificar',['class'=>"btn btn-primary"]) !!}
+      </div>
+        {!! Form::close() !!}
+    </div>
+  </div>
+</div>
+{{-- End Modal --}}
+
 @endsection
 @push('styles')
 @endpush
@@ -54,8 +90,8 @@ Estudiante: {{$student->nombre}} {{$student->paterno}} {{$student->materno}} - {
             columns: [
             { data: 'sigla', name: 'sigla'},
             { data: 'descripcion', name: 'descripcion'},
-            { data: 'nota', name: 'nota'},
-            { data: 'observacion', name: 'observacion'},
+            { data: 'action', name: 'action'},
+            { data: 'observacion', name: 'observacion'}
             ]
         });
     });
