@@ -26,7 +26,7 @@ Materia
             <h3 class="box-title">Pre-requisítos</h3>
             <div class="box-tools pull-right">
             
-              <button type="button" class="btn btn-info circle" data-toggle="modal" data-target="#prerequisiteModal">
+              <button type="button" class="btn bg-navy circle" data-toggle="modal" data-target="#prerequisiteModal">
                 <i class="fa fa-plus"></i>
               </button>
             </div>
@@ -39,6 +39,7 @@ Materia
                             <tr>
                                 <th>Materia</th>
                                 <th>Sigla</th>
+                                <th>Acción</th>
                             </tr>
                         </thead>
                     </table>
@@ -83,6 +84,7 @@ Materia
 
 @endsection
 @push('styles')
+<link rel="stylesheet" href="/css/dropzone.css">
 <style>
     .circle {
         border-radius: 50%;
@@ -112,13 +114,10 @@ Materia
             columns: [
             { data: 'materia_req_sigla', name: 'materia_req_sigla'},
             { data: 'materia_req_desc', name: 'materia_req_desc'},
-            // { data: 'action', name: 'action'}
+            { data: 'action', name: 'action'}
             ]
         });
         $(".js-example-multiple").select2({
-            
-        });
-        $('select').select2({
             minimumInputLength: 2,
         });
     });

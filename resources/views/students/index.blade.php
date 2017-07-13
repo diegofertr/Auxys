@@ -10,11 +10,10 @@ Lista de Estudiantes
   <div class="box-header with-border">
     <h3 class="box-title"></h3>
     <div class="box-tools pull-right">
-      {{-- <a href="{{url('student/import')}}" class="btn btn-info" data-toggle="tooltip" data-placement="left" title="Importar Estudiantes"><i class='glyphicon glyphicon-import '></i></a> --}}
-      <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">
+      <button type="button" class="btn bg-navy" data-toggle="modal" data-target="#myModal">
         <i class='glyphicon glyphicon-import '></i>
       </button>
-      <a href="{{url('students/create')}}" class="btn btn-success" role="button"  data-toggle="tooltip" data-placement="top" title="Crear Estudiante">
+      <a href="{{url('students/create')}}" class="btn bg-olive" role="button"  data-toggle="tooltip" data-placement="top" title="Crear Estudiante">
       <i class="fa fa-plus"></i></a>
     </div>
   </div>

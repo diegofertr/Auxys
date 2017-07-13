@@ -10,7 +10,7 @@ Lista de materias
   <div class="box-header with-border">
     <h3 class="box-title"></h3>
     <div class="box-tools pull-right">
-        <a href="{{url('materias/create')}}" class="btn btn-info circle" role="button"><i class="fa fa-plus"></i></a>
+        <a href="{{url('materias/create')}}" class="btn bg-navy circle" role="button"><i class="fa fa-plus"></i></a>
     </div>
   </div>
   <div class="box-body">

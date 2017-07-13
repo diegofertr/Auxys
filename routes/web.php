@@ -28,11 +28,12 @@ Route::group(['middleware' => 'auth'], function () {
     //materias
     Route::resource('materias', 'Materia\MateriaController');
     Route::get('getMaterias',['as'=>'getMaterias','uses'=>'Materia\MateriaController@getMaterias']);
-    Route::get('materias/deleteM/{id}',['as'=>'deleteM','uses'=>'Materia\MateriaController@deleteM']);
+    Route::get('materias/delete_materia/{id}',['as'=>'delete_materia','uses'=>'Materia\MateriaController@deleteMateria']);
     Route::get('materiaPrerequisitos', ['as'=>'materiaPrerequisitos', 'uses'=>'Materia\MateriaController@materiaPrerequisitos']);
-    Route::post('add_prerequisite_m', array('as'=>'add_prerequisite_m', 'uses'=> 'Materia\MateriaController@addPrerequisite'));
     Route::get('get_list_materias', array('as'=>'get_list_materias', 'uses'=> 'Materia\MateriaController@getListMaterias'));
-   
+    //for prerequisites
+    Route::post('add_prerequisite_m', array('as'=>'add_prerequisite_m', 'uses'=> 'Materia\MateriaController@addPrerequisite'));
+    Route::get('delete_prerequisite_m/{id}/{materia_id}', array('as'=>'delete_prerequisite_m', 'uses'=>'Materia\MateriaController@deletePrerequisite'));
     //for users
     Route::resource('users','User\UserController');
     Route::get('getUsers','User\UserController@getUsers');

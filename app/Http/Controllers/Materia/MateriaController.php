@@ -7,6 +7,9 @@ use Auxys\Http\Controllers\Controller;
 
 use Auxys\Materia;
 use Yajra\Datatables\Datatables;
+use DB;
+use Excel;
+use Auxys\Estudiante;
 
 class MateriaController extends Controller
 {
@@ -25,16 +28,18 @@ class MateriaController extends Controller
         return Datatables::of($materias)
         ->addColumn('action', function ($materia) { return
             '<div class="btn-group">
-              <a href="/materias/'. $materia->id.'" class="btn btn-success circle">
+              <a href="/materias/'. $materia->id.'" class="btn bg-olive circle">
                 <i class="fa fa-eye"></i>
               </a>
-              <button type="button" class="btn btn-danger circle dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <button type="button" class="btn bg-olive circle dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span class="caret"></span>
                 <span class="sr-only">Toggle Dropdown</span>
               </button>
               <ul class="dropdown-menu">
-                <li><a href="/materias/deleteM/' .$materia->id. '" >
-                    <i class="fa fa-minus"></i> Eliminar
+                <li><a href="/materias/delete_materia/' .$materia->id. '" >
+                        <span style="color:red;">
+                            <i class="fa fa-minus"></i> Eliminar
+                        </span>
                     </a>
                 </li>
               </ul>
@@ -94,15 +99,25 @@ class MateriaController extends Controller
     public function addPrerequisite(Request $request){
         $materia = Materia::find($request->materia_id);
         // dd($request);
-        foreach ($request->requisites as $item) {
-            $materia->requisitosMateria()->attach($item);
+        foreach ($request->requisites as $requisite) {
+            $materia->requisitosMateria()->attach($requisite);
         }
         // $materia->requisitosMateria()->attach($request->materia_req_id);
         return back();
     }
 
+    public function deletePrerequisite($id,$materia_id) {
+        // $materia = Materia::find($idM);
+        // dd($data);
+        // $user->roles()->detach($roleId);
+        // dd($id,$materia_id);
+        $materia = Materia::find($materia_id);
+        $materia->requisitosMateria()->detach($id);
+        return back();
+    }
+
     public function materiaPrerequisitos(Request $request) {
-        $requisitos_materia = Materia::find($request->id)->requisitosMateria()->select('materia_req_id')->get();
+        $requisitos_materia = Materia::find($request->id)->requisitosMateria()->select('materia_id','materia_req_id')->get();
         return Datatables::of($requisitos_materia)
         ->editColumn('materia_req_sigla', function ($materia){
             $mate = Materia::find($materia->materia_req_id);
@@ -111,6 +126,12 @@ class MateriaController extends Controller
         ->editColumn('materia_req_desc', function ($materia){
             $mate = Materia::find($materia->materia_req_id);
             return $mate->descripcion;
+        })
+        ->addColumn('action', function($materia) {
+            return '
+            <a href="/delete_prerequisite_m/'.$materia->materia_req_id.'/'.$materia->materia_id.'" class="btn bg-olive" data-toggle="tooltip" data-placement="top" title="Eliminar Prerequisito">
+                <i class="fa fa-minus"></i>
+            </a>';
         })
         ->make(true);
     }
@@ -149,7 +170,7 @@ class MateriaController extends Controller
         //
     }
 
-    public function deleteM($id){
+    public function deleteMateria($id){
         $materia = Materia::find($id);
         $materia->delete();
         return back();

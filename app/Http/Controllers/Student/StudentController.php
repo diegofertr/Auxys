@@ -66,7 +66,8 @@ class StudentController extends Controller
                     }
                 }
             }*/
-            dd($data);
+            // dd($data);
+            return back();
         }
     }
     public function exists($sigla)
@@ -96,37 +97,37 @@ class StudentController extends Controller
     }
     public function getStudents()
     {
-        $students=Estudiante::select('carnet_identidad', 'nombre','paterno','materno','id');
-        return Datatables::of($students)
-                          ->addColumn('action', function ($student)
-                          {
-                              return 
-                              '<div class="btn-group">
-                              <a href="'.url('student', $student).'" role="button" class="btn bg-olive"><i class="fa fa-eye"></i></a>
-                              <button type="button" class="btn bg-olive dropdown-toggle" data-toggle="dropdown">
-                                <span class="caret"></span>
-                                <span class="sr-only">Toggle Dropdown</span>
-                              </button>
-                              <ul class="dropdown-menu" role="menu">
-                                <li><a href="#"><i class="fa fa-pencil"></i>Editar</a></li>
-                                <li><a href="#"><i class="fa fa-minus"></i>Eliminar</a></li>
-                              </ul>
-                              </div>';
-                          })
-                          ->make(true);
+      $students=Estudiante::select('carnet_identidad', 'nombre','paterno','materno','id');
+      return Datatables::of($students)
+      ->addColumn('action', function ($student)
+      {
+        return 
+        '<div class="btn-group">
+        <a href="'.url('student', $student).'" role="button" class="btn bg-olive"><i class="fa fa-eye"></i></a>
+        <button type="button" class="btn bg-olive dropdown-toggle" data-toggle="dropdown">
+          <span class="caret"></span>
+          <span class="sr-only">Toggle Dropdown</span>
+        </button>
+        <ul class="dropdown-menu" role="menu">
+          <li><a href="#"><i class="fa fa-pencil"></i>Editar</a></li>
+          <li><a href="#"><i class="fa fa-minus"></i>Eliminar</a></li>
+        </ul>
+      </div>';
+    })
+      ->make(true);
     }
 
     public function materiaStudent(Request $request) {
-        $student=Estudiante::find($request->id);
-        $materias=$student->materias()->select('id','sigla','descripcion')->get();
-        return Datatables::of($materias)
-        ->editColumn('action', function ($materia){
-            return '<span class="badge bg-green" style="font-size:1.2em">'.$materia->pivot->nota.'</span>';
-        })
-        ->editColumn('observacion', function($materia) {
-            return  'Aprobado  '.$materia->pivot->periodo.'';
-        })
-        ->make(true);
+      $student=Estudiante::find($request->id);
+      $materias=$student->materias()->select('id','sigla','descripcion')->get();
+      return Datatables::of($materias)
+      ->editColumn('action', function ($materia){
+        return '<span class="badge bg-green" style="font-size:1.2em">'.$materia->pivot->nota.'</span>';
+      })
+      ->editColumn('observacion', function($materia) {
+        return  'Aprobado  '.$materia->pivot->periodo.'';
+      })
+      ->make(true);
     }
 
     public function cumpleRequisito(Request $request){
