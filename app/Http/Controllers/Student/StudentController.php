@@ -7,6 +7,7 @@ use Auxys\Http\Controllers\Controller;
 use Excel;
 use Auxys\Estudiante;
 use Auxys\Materia;
+use Auxys\Semestre;
 use Yajra\Datatables\Datatables;
 
 
@@ -237,13 +238,14 @@ class StudentController extends Controller
     {
         $student=Estudiante::find($id);
         $materias = Materia::all();
+        $semestres = Semestre::all();
         $materias_list = array('' => '');
         foreach ($materias as $item) {
             $materias_list[$item->id] = $item->sigla;
         }
         // $materias=$student->materias;
         // return view('students.show',compact('student','materias'));   
-        return view('students.show',compact('student','materias_list'));   
+        return view('students.show',compact('student','materias_list','semestres'));   
     }
 
     /**

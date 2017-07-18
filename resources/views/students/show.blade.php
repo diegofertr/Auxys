@@ -7,34 +7,48 @@ Estudiante: {{$student->nombre}} {{$student->paterno}} {{$student->materno}} - {
 @endsection
 @section('main-content')
 <div class="row">
-	<div class="box">
-	  <div class="box-header with-border">
-	    <h3 class="box-title">SEMESTRE</h3>
-	    <div class="box-tools pull-right">
-	    	{{-- code --}}
-	    	<button type="button" class="btn btn-info circle" data-toggle="modal" data-target="#prerequisiteModal">
-          <i class="fa fa-plus"> Postular</i>
-        </button>
-	    </div>
-	  </div>
-	  <div class="box-body">
-	  		<div class="row">
-	  		    <div class="col-md-12">
-	  		        <table id="materias-table" class="table table-bordered">
-	  		            <thead>
-	  		                <tr>
-	  		                    <th>Sigla</th>
-	  		                    <th>Materia</th>
-	  		                    <th>Nota</th>
-	  		                    <th>Observacion</th>
-	  		                </tr>
-	  		            </thead>
-	  		        </table>
-	  		    </div>
-	  		</div>
-	  	
-	  </div>
-	</div>
+@foreach($semestres as $semestre)
+    <div class="col-md-6">
+        <div class="box">
+          <div class="box-header with-border">
+            <h3 class="box-title">{{ $semestre->nombre }}</h3>
+            <div class="box-tools pull-right">
+                {{-- code --}}
+                <button type="button" class="btn btn-info circle" data-toggle="modal" data-target="#prerequisiteModal">
+              <i class="fa fa-plus"> Postular</i>
+            </button>
+            </div>
+          </div>
+          <div class="box-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <table id="materias-table" class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Sigla</th>
+                                    <th>Materia</th>
+                                    <th>Nota</th>
+                                    <th>Observacion</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($student->materiasSemestre($semestre->id) as $materia)
+                                    <tr>
+                                        <td>{{ $materia->sigla }}</td>
+                                        <td>{{ $materia->descripcion }}</td>
+                                        <td><span class="badge bg-green" style="font-size:1.2em">{{$materia->pivot->nota}}</span></td>
+                                        <td>Aprobado {{$materia->pivot->periodo}}</td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            
+          </div>
+        </div>
+    </div>
+@endforeach
 
 </div>
 
@@ -77,7 +91,7 @@ Estudiante: {{$student->nombre}} {{$student->paterno}} {{$student->materno}} - {
 @push('scripts')
 <script type="text/javascript">
     $(function () {
-        var oTable = $('#materias-table').DataTable({
+        /*var oTable = $('#materias-table').DataTable({
             "dom": '<"top">t<"bottom"p>',
             processing: true,
             serverSide: true,
@@ -93,7 +107,7 @@ Estudiante: {{$student->nombre}} {{$student->paterno}} {{$student->materno}} - {
             { data: 'action', name: 'action'},
             { data: 'observacion', name: 'observacion'}
             ]
-        });
+        });*/
     });
 </script>
 @endpush

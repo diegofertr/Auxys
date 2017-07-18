@@ -31,7 +31,10 @@ class Estudiante extends Model
 	{
 		return $this->belongsTomany(Materia::class)->withPivot('nota', 'periodo');
 	}
-
+  public function materiasSemestre($semestre_id)
+  {
+    return $this->materias()->where('semestre_id','=',$semestre_id)->get();
+  }
 	public function requisitosC(){
       return $this->belongsToMany('Auxys\RequisitosConvocatoria','documentos_entregados','estudiante_id','requisitoc_id');
   	}
