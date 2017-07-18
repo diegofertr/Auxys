@@ -42,6 +42,9 @@ class StudentController extends Controller
             }else{
                 $temp=array_merge($temp,array('materia_status'=>'danger','materia_icon'=>'close','materia_color'=>'#A94442'));
             }
+
+            $temp=array_merge($temp,array('student_id'=>$student->id));
+
             
             $results[]=$temp;
         }
@@ -55,7 +58,12 @@ class StudentController extends Controller
         }
         return response()->json('error');
     }
-
+    public function postulate(Request $request)
+    {
+        $student=Estudiante::find($request->student_id_postulate);
+        $materia_id=$request->materia_id_postulate;
+        $student->materias_postula()->attach($materia_id,['nota_examen_escrito' =>0,'nota_meritos' =>0,'nota_examen_oral'=>0, 'total'=>0,'designado'=>0,'categoria'=>'']);
+    }
     /**
      * Display a listing of the resource.
      *

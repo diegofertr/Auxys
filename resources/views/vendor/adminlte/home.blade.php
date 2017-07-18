@@ -30,7 +30,8 @@ Inscribiendo Estudiante
 			<div class="col-md-8 col-md-offset-2">
 				<!-- Default box -->
 				<div class="box">
-					{!! Form::open(['method'=>'POST','route'=>'check_student','class'=>"form-horizontal"])!!}
+				<form action="#" method="POST" class="form-horizontal">	
+					{{-- {!! Form::open(['method'=>'POST','route'=>'check_student','class'=>"form-horizontal"])!!} --}}
 					<div class="box-header with-border">
 						<h3 class="box-title">Inscribir Alumno</h3>
 					</div>
@@ -53,13 +54,13 @@ Inscribiendo Estudiante
 					<div class="box-footer" style="text-align: center;">
 					    <button type="button" id='check_button' class="btn btn-success ">Verificar</button>
 					</div>
-					{!! Form::close()!!}
+					{{-- {!! Form::close()!!} --}}
+				</form>
 				</div>
 			</div>
 		</div>
 		<div class="row">
 			<div class="box" id="results" >
-				{!! Form::open(['method'=>'POST','route'=>'check_student','class'=>"form-horizontal"])!!}
 				<div class="box-header with-border">
 					<h3 class="box-title" id='results-title'></h3>
 				</div>
@@ -84,6 +85,30 @@ Inscribiendo Estudiante
 			</div>
 		</div>
 	</div>
+<!-- Modal postulate -->
+<div class="modal fade" id="postulateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Verificar Requisitos</h4>
+      </div>
+      {!! Form::open(['method'=>'POST','route'=>'postulate','id'=>'postulateForm']) !!}
+      <div class="modal-body">
+        ...
+        ...
+        ...
+        <input type="hidden" name="student_id_postulate" id='student_id_postulate'>
+        <input type="hidden" name="materia_id_postulate" id='materia_id_postulate'>
+      </div>
+      <div class="modal-footer" style="text-align: center">
+        <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-close"></i> Cancelar</button>
+        <button type="submit" class="btn btn-success"><i class="fa fa-check"></i> Guardar</button>
+      </div>
+      {!! Form::close() !!}
+    </div>
+  </div>
+</div>
 @endsection
 @push('scripts')
 <script src="/js/select2.full.min.js"></script>
@@ -112,7 +137,8 @@ Inscribiendo Estudiante
             }
 		});
 		//for check student
-		$('#check_button').on('click',function () {
+		$('#check_button').on('click',function (event) {
+			event.preventDefault();
 			$.ajax({
 				url: '/check_student',
 				type: 'GET',
@@ -136,7 +162,11 @@ Inscribiendo Estudiante
 					tr.append(td);
 					td = $('<td>').append(val.descripcion);
 					tr.append(td);
-					td = $('<td>').append('opciones');
+					var button=$('<button>').attr('data-toggle', 'modal').attr('data-target', '#postulateModal').text('Pre Inscribir').addClass("btn btn-default postulateButton").attr('data-materia-id-postulate', val.materia_id).attr('data-student-id-postulate', val.student_id);
+					if (val.status == 'danger') {
+						button.attr('disabled', 'disabled');
+					}
+					td = $('<td>').append(button);
 					tr.append(td);
 					td = $('<td>').append($('<span>').addClass('fa fa-'+val.materia_icon)).css('color',val.materia_color);
 					tr.append(td);
@@ -158,26 +188,28 @@ Inscribiendo Estudiante
 				console.log(data);
 				$('#results-title').append('Resultados de: '+data.paterno+' '+data.materno+' '+data.nombre+' - '+data.carnet_identidad);
 			});
-			
-			/*$('#results-student-table').DataTable({
-                serverSide: true,
-                processing: true,
-                ajax: {
-                	url:'/check_student',
-		            data:function (d) {	
-		            	d.cedula_identidad = $('#cedula_identidad').val(),
-		            	d.materias = $('#materias').val()
-		            }
-                },
-                
-                columns: [
-                    {data: 'status'},
-                    {data: 'materia_id'},
-                    {data: 'sigla'},
-                    {data: 'descripcion'},
-                    {data: 'action', orderable: false, searchable: false}
-                ]
-            });*/
+		});
+		//for postulate student
+		var postulate_button;
+		$(document).on('click','.postulateButton',function () {
+			$('#student_id_postulate').val($(this).data('student-id-postulate'));
+			$('#materia_id_postulate').val($(this).data('materia-id-postulate'));
+			postulate_button = $(this);
+		})
+		$('#postulateForm').submit(function(event) {
+			event.preventDefault();
+			$.ajax({
+				type: $(this).attr('method'),
+				url: $(this).attr('action'),
+				data: $(this).serialize(),
+				success: function() {
+					$('#postulateModal').modal('hide');
+					postulate_button.parent().parent().remove();
+				},
+				error:function () {
+					alert('error');
+				}
+			});
 		});
 	});	
 </script>

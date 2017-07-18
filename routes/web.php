@@ -49,6 +49,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('postulants', 'Student\StudentController@postulants');
     Route::get('check_student', ['as'=> 'check_student','uses'=>'Student\StudentController@check']);
     Route::get('get_student_info', ['as'=> 'get_student_info','uses'=>'Student\StudentController@getStudentInfo']);
+    Route::post('postulate', ['as'=> 'postulate','uses'=>'Student\StudentController@postulate']);
     
     //convocatoria
     Route::get('print_announcement','Convocatoria\ConvocatoriaController@print_announcement');
