@@ -204,8 +204,10 @@ class StudentController extends Controller
         }
     }
 
-    public function postulants(){
-      return view('postulants.index');
+    public function postulants()
+    {
+      $materias=Materia::all();
+      return view('postulants.index',compact('materias'));
     }
     /**
      * Show the form for creating a new resource.

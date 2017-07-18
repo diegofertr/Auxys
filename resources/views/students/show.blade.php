@@ -22,9 +22,9 @@ Estudiante: {{$student->nombre}} {{$student->paterno}} {{$student->materno}} - {
           <div class="box-body">
                 <div class="row">
                     <div class="col-md-12">
-                        <table id="materias-table" class="table table-bordered">
+                        <table id="materias-table" class="table table-bordered table-striped">
                             <thead>
-                                <tr>
+                                <tr class="info">
                                     <th>Sigla</th>
                                     <th>Materia</th>
                                     <th>Nota</th>
