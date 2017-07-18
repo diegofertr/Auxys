@@ -12,6 +12,50 @@ use Yajra\Datatables\Datatables;
 
 class StudentController extends Controller
 {
+    public function check(Request $request)
+    {
+        $student_ci=$request->cedula_identidad;
+        $student=Estudiante::where('carnet_identidad','like',$request->cedula_identidad)->first();
+        $results=array();
+        foreach ($request->materias as $materia_id) {
+            $materia=Materia::find($materia_id);
+            $aprobo_materia=$student->aproboMateria($materia_id);
+            $aprobo_semestre=$student->aproboHastaSemestre($materia->semestre_id);
+            $aprobo_prerequisitos=$student->aproboPrerequisitos($materia_id);
+            if ($aprobo_materia && $aprobo_semestre && $aprobo_prerequisitos) {
+                $temp=array('materia_id'=>$materia_id,'sigla'=>$materia->sigla,'descripcion'=>$materia->descripcion,'icon'=>'check','status'=>'success','color'=>'#3C763D');
+            }else{
+                $temp=array('materia_id'=>$materia->id,'sigla'=>$materia->sigla,'descripcion'=>$materia->descripcion,'icon'=>'close','status'=>'danger','color'=>'#A94442');
+            }
+            if ($aprobo_semestre) {
+                $temp=array_merge($temp,array('semestre_status'=>'success','semestre_icon'=>'check','semestre_color'=>'#3C763D'));
+            }else{
+                $temp=array_merge($temp,array('semestre_status'=>'danger','semestre_icon'=>'close','semestre_color'=>'#A94442'));
+            }
+            if ($aprobo_prerequisitos) {
+                $temp=array_merge($temp,array('prerequisitos_status'=>'success','prerequisitos_icon'=>'check','prerequisitos_color'=>'#3C763D'));
+            }else{
+                $temp=array_merge($temp,array('prerequisitos_status'=>'danger','prerequisitos_icon'=>'close','prerequisitos_color'=>'#A94442'));
+            }
+            if ($aprobo_materia) {
+                $temp=array_merge($temp,array('materia_status'=>'success','materia_icon'=>'check','materia_color'=>'#3C763D'));
+            }else{
+                $temp=array_merge($temp,array('materia_status'=>'danger','materia_icon'=>'close','materia_color'=>'#A94442'));
+            }
+            
+            $results[]=$temp;
+        }
+        return response()->json($results);
+    }
+    public function getStudentInfo(Request $request)
+    {
+        $student=Estudiante::where('carnet_identidad','=',$request->cedula_identidad)->first();
+        if ($student) {
+            return response()->json($student);
+        }
+        return response()->json('error');
+    }
+
     /**
      * Display a listing of the resource.
      *

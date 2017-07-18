@@ -41,4 +41,8 @@ class Materia extends Model
         $materia->save();
       }
     }
+    public function semestre()
+    {
+      return $this->belongsTo(Semestre::class);
+    }
 }

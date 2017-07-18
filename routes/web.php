@@ -38,7 +38,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('users','User\UserController');
     Route::get('getUsers','User\UserController@getUsers');
 
-    //import
+    //student and import
     Route::get('student/import','Student\StudentController@import');
     Route::resource('student','Student\StudentController');
     Route::post('importStudents','Student\StudentController@importStudents');
@@ -47,6 +47,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('materiaStudent', ['as'=>'materiaStudent', 'uses'=>'Student\StudentController@materiaStudent']);
     Route::post('cumple_requisito', array('as'=>'cumple_requisito', 'uses'=> 'Student\StudentController@cumpleRequisito'));
     Route::get('postulants', 'Student\StudentController@postulants');
+    Route::get('check_student', ['as'=> 'check_student','uses'=>'Student\StudentController@check']);
+    Route::get('get_student_info', ['as'=> 'get_student_info','uses'=>'Student\StudentController@getStudentInfo']);
     
     //convocatoria
     Route::get('print_announcement','Convocatoria\ConvocatoriaController@print_announcement');
