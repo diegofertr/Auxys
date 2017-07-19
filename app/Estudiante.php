@@ -77,4 +77,8 @@ class Estudiante extends Model
    		}
    		return true;
    	}
+    public function getFullName()
+    {
+      return $this->paterno.' '.$this->materno.' '.$this->nombre;
+    }
 }

@@ -3,42 +3,9 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Convocatoria</title>
+	<link rel="stylesheet" type="text/css" href="css/print.css">
 	<style type="text/css">
-		body{
-			font-family: "FreeMono"
-		}
-		.center{
-			text-align: center;
-		}
-		.bold{
-			font-weight: bold;
-		}
-		.italic{
-			font-style: italic;
-		}
-		.justify{
-			text-align: justify;
-		}
-		.materias{
-			width: 100%
-		}
-		.teachers{
-			width: 90%;
-			margin:0 auto
-		}
-		th{
-			text-align: center;
-		}
-		.materias,.materias td, .materias th{
-			border: 1px solid #000;
-			border-collapse: collapse;
-		}
-		td{
-			padding: 1px 5px;
-		}
-		.alpha-list{
-			list-style-type: lower-alpha;
-		}
+		
 	</style>
 </head>
 <body>
