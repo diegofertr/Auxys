@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Auxys\Http\Controllers\Controller;
 
 use Auxys\Materia;
-use Yajra\Datatables\Datatables;
+use Datatables;
 use DB;
 use Excel;
 use Auxys\Estudiante;
@@ -44,6 +44,20 @@ class MateriaController extends Controller
                 </li>
               </ul>
             </div>';})
+        ->editColumn('prerequisites', function($materia) {
+            $requisitos_materia = $materia->requisitosMateria;
+            $valor = ' ';
+            foreach ($requisitos_materia as $item){
+                $valor.=$item->sigla.', ';
+            }
+            $valor = substr($valor,0,-2).'.';
+            if ($valor == '.' || $valor == '') {
+              return 'No tiene prerequisitos.';
+            } else {
+              return $valor;
+            }
+          // return 'BALUBALUBALU.';
+        })
         ->make(true);        
     }
 

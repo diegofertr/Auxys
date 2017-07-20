@@ -15,9 +15,6 @@ Lista de Postulantes
         </button>
     </div>
   </div>
-  <div class="box-body">
-      
-  </div>
 </div>
 
 @endsection
