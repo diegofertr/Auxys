@@ -12,9 +12,7 @@ Materia
           <div class="box-header with-border">
             <h2 class="box-title"><b>{{ $materia->sigla }}</b></h2>
             <div class="box-tools pull-right"></div>
-            <!-- /.box-tools -->
           </div>
-          <!-- /.box-header -->
           <div class="box-body">
             <h4>{{ $materia->descripcion }}</h4>
           </div>
@@ -25,7 +23,6 @@ Materia
           <div class="box-header with-border">
             <h3 class="box-title">Pre-requisítos</h3>
             <div class="box-tools pull-right">
-            
               <button type="button" class="btn bg-navy circle" data-toggle="modal" data-target="#prerequisiteModal">
                 <i class="fa fa-plus"></i>
               </button>
@@ -46,7 +43,7 @@ Materia
                 </div>
             </div>
           </div>
-        </div>        
+        </div>
     </div>
 </div>
 
@@ -54,7 +51,6 @@ Materia
 <div class="modal fade" id="prerequisiteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-    {{-- {!! Form::open(['url' => 'prerequisites']) !!} --}}
     {!! Form::open(['method' => 'POST', 'route' => ['add_prerequisite_m'], 'class' => 'form-horizontal']) !!}
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -80,7 +76,7 @@ Materia
     </div>
   </div>
 </div>
-{{-- End Modal --}}
+{{-- End Modal --}} 
 
 @endsection
 @push('styles')

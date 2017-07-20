@@ -16,15 +16,27 @@ Lista de materias
   <div class="box-body">
     <div class="row">
         <div class="col-md-12">
-            <table id="materias-table" class="table table-bordered table-hover table-striped">
+            {{-- <table id="materias-table" class="table table-bordered table-hover table-striped">
                 <thead>
                     <tr>
                         <th>Id</th>
                         <th>Sigla</th>
                         <th>Descripción</th>
+                        <th>Prerequisitos</th>
                         <th>Acción</th>
                     </tr>
                 </thead>
+            </table> --}}
+            <table id="materias-table" class="footable toggle-circle" data-toggle-column="last">
+              <thead>
+                <tr>
+                  <th>Id</th>
+                  <th>Sigla</th>
+                  <th>Descripción</th>
+                  <th>Acción</th>
+                  <th data-breakpoints="all" data-title="Prerequisitos: "></th>
+                </tr>
+              </thead>
             </table>
         </div>
     </div>
@@ -47,23 +59,25 @@ Lista de materias
 </style>
 @endpush
 @push('scripts')
-<script type="text/javascript" src="/js/jquery.dataTables.min.js"></script>
-    <script type="text/javascript">
-        $(function () {
-            var oTable = $('#materias-table').DataTable({
-            processing: true,
-            serverSide: true,
-            ajax: {
-                url: '{!! route('getMaterias') !!}'
-            },
-            columns: [
-                { data: 'id', name: 'id'},
-                { data: 'sigla', name: 'sigla'},
-                { data: 'descripcion', name: 'descripcion'},
-                { data: 'action', name: 'action'}
-            ]
-            });
+<script type="text/javascript">
+    $(function () {
+      
+        $("#materias-table").footable();
 
+        var oTable = $('#materias-table').DataTable({
+        processing: true,
+        serverSide: true,
+        ajax: {
+            url: '{!! route('getMaterias') !!}'
+        },
+        columns: [
+            { data: 'id', name: 'id'},
+            { data: 'sigla', name: 'sigla'},
+            { data: 'descripcion', name: 'descripcion'},
+            { data: 'action', name: 'action'},
+            { data: 'prerequisites', name: 'prerequisites'},
+        ]
         });
-    </script>
+    });
+</script>
 @endpush
