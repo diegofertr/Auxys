@@ -7,6 +7,7 @@ use Auxys\Http\Controllers\Controller;
 use Excel;
 use Auxys\Estudiante;
 use Auxys\Materia;
+use Auxys\Semestre;
 use Yajra\Datatables\Datatables;
 
 
@@ -42,6 +43,9 @@ class StudentController extends Controller
             }else{
                 $temp=array_merge($temp,array('materia_status'=>'danger','materia_icon'=>'close','materia_color'=>'#A94442'));
             }
+
+            $temp=array_merge($temp,array('student_id'=>$student->id));
+
             
             $results[]=$temp;
         }
@@ -55,7 +59,12 @@ class StudentController extends Controller
         }
         return response()->json('error');
     }
-
+    public function postulate(Request $request)
+    {
+        $student=Estudiante::find($request->student_id_postulate);
+        $materia_id=$request->materia_id_postulate;
+        $student->materias_postula()->attach($materia_id,['nota_examen_escrito' =>0,'nota_meritos' =>0,'nota_examen_oral'=>0, 'total'=>0,'designado'=>0,'categoria'=>'']);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -195,8 +204,10 @@ class StudentController extends Controller
         }
     }
 
-    public function postulants(){
-      return view('postulants.index');
+    public function postulants()
+    {
+      $materias=Materia::all();
+      return view('postulants.index',compact('materias'));
     }
     /**
      * Show the form for creating a new resource.
@@ -229,13 +240,14 @@ class StudentController extends Controller
     {
         $student=Estudiante::find($id);
         $materias = Materia::all();
+        $semestres = Semestre::all();
         $materias_list = array('' => '');
         foreach ($materias as $item) {
             $materias_list[$item->id] = $item->sigla;
         }
         // $materias=$student->materias;
         // return view('students.show',compact('student','materias'));   
-        return view('students.show',compact('student','materias_list'));   
+        return view('students.show',compact('student','materias_list','semestres'));   
     }
 
     /**

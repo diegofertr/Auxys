@@ -29,6 +29,9 @@ class Materia extends Model
    	public function requisitosMateria(){
 		return $this->belongsToMany('Auxys\Materia', 'requisitos_m','materia_id','materia_req_id');
    	}
+    public function estudiantes_postulados(){
+      return $this->belongsToMany('Auxys\Estudiante', 'estudiante_postula_materia','materia_id');
+    }
     
    	public function estudiantes()
    	{
