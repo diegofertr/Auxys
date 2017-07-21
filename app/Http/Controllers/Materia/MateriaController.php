@@ -10,6 +10,8 @@ use Datatables;
 use DB;
 use Excel;
 use Auxys\Estudiante;
+use Auxys\Semestre;
+
 
 class MateriaController extends Controller
 {
@@ -19,8 +21,13 @@ class MateriaController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        return view('materias.index');
+    {   
+        $materias = Materia::all();
+        $materias_list = array('' => '');
+        foreach ($materias as $item) {
+            $materias_list[$item->id] = $item->sigla;
+        }
+        return view('materias.index', compact('materias_list'));
     }
 
     public function getMaterias(Request $request) {
@@ -28,22 +35,33 @@ class MateriaController extends Controller
         return Datatables::of($materias)
         ->addColumn('action', function ($materia) { return
             '<div class="btn-group">
-              <a href="/materias/'. $materia->id.'" class="btn bg-olive circle">
-                <i class="fa fa-eye"></i>
-              </a>
-              <button type="button" class="btn bg-olive circle dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="caret"></span>
-                <span class="sr-only">Toggle Dropdown</span>
+              <button type="button" class="btn bg-olive dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Acciones <span class="caret"></span>
               </button>
               <ul class="dropdown-menu">
-                <li><a href="/materias/delete_materia/' .$materia->id. '" >
-                        <span style="color:red;">
+                <li>
+                  <button type="button" class="btn bg-navy" data-toggle="modal" data-target="#prerequisiteModal" data-sigla="'.$materia->sigla.'" data-id="'.$materia->id.'">
+                    <span>
+                      <i class="fa fa-plus"></i> Añadir Prerequisito
+                    </span>
+                  </button>
+                </li>
+                <li role="separator" class="divider"></li>
+                <li><a href="#" class="btn bg-orange">
+                        <span>
+                            <i class="fa fa-pencil"></i> Editar
+                        </span>
+                    </a>
+                </li>
+                <li><a href="/materias/delete_materia/' .$materia->id. '" class="btn bg-maroon">
+                        <span>
                             <i class="fa fa-minus"></i> Eliminar
                         </span>
                     </a>
                 </li>
               </ul>
-            </div>';})
+            </div>
+            ';})
         ->editColumn('prerequisites', function($materia) {
             $requisitos_materia = $materia->requisitosMateria;
             $valor = ' ';
@@ -67,8 +85,13 @@ class MateriaController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        return view('materias.create');
+    {   
+        $sems = Semestre::all();
+        $semestres = ['' => ''];
+        foreach ($sems as $s) {
+          $semestres[$s->id] = $s->nombre;
+        }
+        return view('materias.create', compact('semestres'));
     }
 
     /**
@@ -82,7 +105,9 @@ class MateriaController extends Controller
         $materia = new Materia();
         $materia->sigla = $request->sigla;
         $materia->descripcion = $request->descripcion;
+        $materia->semestre_id = $request->semester_id;
         $materia->save();
+
         return redirect()->route('materias.index');
     }
 
@@ -95,19 +120,19 @@ class MateriaController extends Controller
     public function show($id)
     {
         //
-        $materia = Materia::find($id);
-        // $requisitos_materia = Materia::find($id)->requisitosMateria()->get();
-        // // dd($requisitos_materia[0]->sigla);
-        // $requisitos_list = array('' => '');
-        // foreach ($requisitos_materia as $item) {
-        //     $requisitos_list[$item->id] = $item->sigla;
+        // $materia = Materia::find($id);
+        // // $requisitos_materia = Materia::find($id)->requisitosMateria()->get();
+        // // // dd($requisitos_materia[0]->sigla);
+        // // $requisitos_list = array('' => '');
+        // // foreach ($requisitos_materia as $item) {
+        // //     $requisitos_list[$item->id] = $item->sigla;
+        // // }
+        // $materias = Materia::all();
+        // $materias_list = array('' => '');
+        // foreach ($materias as $item) {
+        //     $materias_list[$item->id] = $item->sigla;
         // }
-        $materias = Materia::all();
-        $materias_list = array('' => '');
-        foreach ($materias as $item) {
-            $materias_list[$item->id] = $item->sigla;
-        }
-        return view('materias.show', compact('materia','materias_list'));
+        // return view('materias.show', compact('materia','materias_list'));
     }
 
     public function addPrerequisite(Request $request){

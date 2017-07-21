@@ -31,6 +31,14 @@ Nueva Materia
                                     <span class="help-block">Descripción</span>
                                 </div>
                             </div>
+                            <div class="form-group">
+                                {!! Form::label('semester_id', 'Semestre ', ['class' => 'col-md-4 control-label']) !!}
+                                <div class="col-md-6">
+                                    {!! Form::select('semester_id', $semestres, null, ['class'=> 'form-control', 'required' => 'required']) !!}
+                                    
+                                </div>
+                            </div>
+
                         </div>   
                     </div>
                 </div>
