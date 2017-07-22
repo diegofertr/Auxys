@@ -5,7 +5,7 @@
 <script src="{{ url (mix('/js/app.js')) }}" type="text/javascript"></script>
 <script type="text/javascript" src="/js/jquery.dataTables.min.js"></script>
 <script src="/js/select2.min.js"></script>
-<script src="/js/footable.js"></script>
+
 {{-- <script src="/js/bootstrap-select.min.js"></script> --}}
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
       Both of these plugins are recommended to enhance the

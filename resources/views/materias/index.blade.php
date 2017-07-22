@@ -117,10 +117,11 @@ Lista de materias
                     <span aria-hidden="true">&times;</span>
                     <span class="sr-only">Close</span>
                 </button>
-                <h4 class="modal-title">Editar Materia</h4>
+                <h4 class="modal-title">Edit</h4>
             </div>
+            {!! Form::open(['method' => 'POST', 'route' => ['edit_materia'], 'class' => 'form-horizontal']) !!} 
             <div class="modal-body">
-                {!! Form::open(['url' => 'materias', 'method'=>'PUT','class'=>'form-horizontal']) !!}
+                {!! Form::token() !!}
                 <div class="row">
                     <div class="col-md-12">
                         <div class="form-group">
@@ -140,16 +141,16 @@ Lista de materias
                         <div class="form-group">
                             {!! Form::label('semester_id', 'Semestre ', ['class' => 'col-md-4 control-label']) !!}
                             <div class="col-md-6">
-                                {!! Form::select('semester_id', $semestres, ' ', ['class'=> 'form-control', 'required' => 'required', 'id' =>'semestre']) !!}
-                                
+                                {!! Form::select('semestre', $semestres, null, ['class'=> 'form-control', 'required' => 'required', 'id' =>'semestre']) !!}
                             </div>
                         </div>
+                        {!! Form::hidden('materia_id', '', ['id' => 'materia_id']) !!}
                     </div>   
                 </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                <button type="submit" class="btn btn-raised btn-success" data-toggle="tooltip" data-placement="bottom" data-original-title="Guardar">&nbsp;<i class="glyphicon glyphicon-floppy-disk"></i>&nbsp;</button>
+                {!! Form::submit('Guardar',['class'=>"btn btn-raised btn-success"]) !!}
             </div>
             {!! Form::close() !!}
         </div>
@@ -196,28 +197,29 @@ Lista de materias
         });
 
         $('#prerequisiteModal').on('show.bs.modal', function(event) {
-            var button = $(event.relatedTarget)
+            var button = $(event.relatedTarget);
             var id = button.data('id');
             var sigla = button.data('sigla');
             console.log(sigla, id);
             var modal = $(this);
             // modal.find('#sigla').val(sigla)
-            modal.find('.modal-title').text('Añadir prerequisitos a ' + sigla)
-            modal.find('#materia_id').val(id)
+            modal.find('.modal-title').text('Añadir prerequisitos a ' + sigla);
+            modal.find('#materia_id').val(id);
         });
 
         $('#editmateriaModal').on('show.bs.modal', function(event) {
-            var button = $(event.relatedTarget)
+            var button = $(event.relatedTarget);
             var id = button.data('id');
             var sigla = button.data('sigla');
             var descripcion = button.data('descripcion');
-            var semestre_id = button.data('semestre_id');
+            var semestre = button.data('semestre');
             var modal = $(this);
-            // modal.find('#sigla').val(sigla)
-            modal.find('.modal-title').text('Editar Materia ' + sigla)
-            modal.find('#sigla').val(sigla)
-            modal.find('#descripcion').val(descripcion)
-            modal.find('#semestre').val(semestre_id)
+            console.log(id,sigla,descripcion,semestre);
+            modal.find('.modal-title').text('Editar Materia ' + sigla);
+            modal.find('#materia_id').val(id);
+            modal.find('#sigla').val(sigla);
+            modal.find('#descripcion').val(descripcion);
+            modal.find('#semestre').val(semestre);
 
         });
 

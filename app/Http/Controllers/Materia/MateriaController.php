@@ -36,10 +36,11 @@ class MateriaController extends Controller
     }
 
     public function getMaterias(Request $request) {
-        $materias = Materia::select(['id', 'sigla', 'descripcion'])->get();
+        $materias = Materia::select(['id', 'sigla', 'descripcion', 'semestre_id'])->get();
         return Datatables::of($materias)
         ->addColumn('action', function ($materia) { return
-            '<div class="btn-group">
+            '
+             <div class="dropup">
               <button type="button" class="btn bg-olive dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Acciones <span class="caret"></span>
               </button>
@@ -61,7 +62,7 @@ class MateriaController extends Controller
                 </li>
 
                 <li class="dropdown-header">Materia - opciones</li>
-                <li><button type="button" class="btn bg-orange btn-sm" data-toggle="modal" data-target="#editmateriaModal" data-id="'.$materia->id.'" data-sigla="'.$materia->sigla.'" data-descripcion="'.$materia->descripcion.'" data-semestre_id="'.$materia->semestre_id.'">
+                <li><button type="button" class="btn bg-orange btn-sm" data-toggle="modal" data-target="#editmateriaModal" data-id="'.$materia->id.'" data-sigla="'.$materia->sigla.'" data-descripcion="'.$materia->descripcion.'" data-semestre='.$materia->semestre_id.'>
                       <span>
                         <i class="fa fa-pencil"></i> Editar Materia
                       </span>
@@ -88,7 +89,6 @@ class MateriaController extends Controller
             } else {
               return $valor;
             }
-          // return 'BALUBALUBALU.';
         })
         ->make(true);        
     }
@@ -122,8 +122,7 @@ class MateriaController extends Controller
         $materia->semestre_id = $request->semester_id;
         $materia->save();
 
-        // return redirect()->route('materias.index');
-        return back();
+        return redirect()->route('materias.index');
     }
 
     /**
@@ -134,20 +133,7 @@ class MateriaController extends Controller
      */
     public function show($id)
     {
-        //
-        // $materia = Materia::find($id);
-        // // $requisitos_materia = Materia::find($id)->requisitosMateria()->get();
-        // // // dd($requisitos_materia[0]->sigla);
-        // // $requisitos_list = array('' => '');
-        // // foreach ($requisitos_materia as $item) {
-        // //     $requisitos_list[$item->id] = $item->sigla;
-        // // }
-        // $materias = Materia::all();
-        // $materias_list = array('' => '');
-        // foreach ($materias as $item) {
-        //     $materias_list[$item->id] = $item->sigla;
-        // }
-        // return view('materias.show', compact('materia','materias_list'));
+
     }
 
     public function addPrerequisite(Request $request){
@@ -161,10 +147,6 @@ class MateriaController extends Controller
     }
 
     public function deletePrerequisite($id,$materia_id) {
-        // $materia = Materia::find($idM);
-        // dd($data);
-        // $user->roles()->detach($roleId);
-        // dd($id,$materia_id);
         $materia = Materia::find($materia_id);
         $materia->requisitosMateria()->detach($id);
         return back();
@@ -190,44 +172,14 @@ class MateriaController extends Controller
         ->make(true);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
+    public function editMateria(Request $request) {
+      $materia = Materia::find($request->materia_id);
+      $materia->sigla = $request->sigla;
+      $materia->descripcion = $request->descripcion;
+      $materia->semestre_id = $request->semestre;
+      $materia->save();
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        $materia = Materia::find($id);
-        $materia->sigla = $request->sigla;
-        $materia->descripcion = $request->descripcion;
-        $materia->semestre_id = $request->semester_id;
-        $materia->save();
-        
-        return back();
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+      return back(); 
     }
 
     public function deleteMateria($id){
