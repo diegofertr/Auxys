@@ -27,7 +27,12 @@ class MateriaController extends Controller
         foreach ($materias as $item) {
             $materias_list[$item->id] = $item->sigla;
         }
-        return view('materias.index', compact('materias_list'));
+        $sems = Semestre::all();
+        $semestres = ['' => ''];
+        foreach ($sems as $s) {
+          $semestres[$s->id] = $s->nombre;
+        }
+        return view('materias.index', compact('materias_list','semestres'));
     }
 
     public function getMaterias(Request $request) {
@@ -39,23 +44,32 @@ class MateriaController extends Controller
                 Acciones <span class="caret"></span>
               </button>
               <ul class="dropdown-menu">
+                <li class="dropdown-header">Prerequisitos - opciones</li>
                 <li>
-                  <button type="button" class="btn bg-navy" data-toggle="modal" data-target="#prerequisiteModal" data-sigla="'.$materia->sigla.'" data-id="'.$materia->id.'">
+                  <button type="button" class="btn bg-navy btn-sm" data-toggle="modal" data-target="#prerequisiteModal" data-sigla="'.$materia->sigla.'" data-id="'.$materia->id.'">
                     <span>
                       <i class="fa fa-plus"></i> Añadir Prerequisito
                     </span>
                   </button>
                 </li>
-                <li role="separator" class="divider"></li>
-                <li><a href="#" class="btn bg-orange">
-                        <span>
-                            <i class="fa fa-pencil"></i> Editar
-                        </span>
-                    </a>
+                <li>
+                  <button type="button" class="btn bg-purple btn-sm" data-toggle="modal" data-target="#editprerequisiteModal" data-id="'.$materia->id.'">
+                    <span>
+                      <i class="fa fa-pencil"></i> Editar Prerequisitos
+                    </span>
+                  </button>
                 </li>
-                <li><a href="/materias/delete_materia/' .$materia->id. '" class="btn bg-maroon">
+
+                <li class="dropdown-header">Materia - opciones</li>
+                <li><button type="button" class="btn bg-orange btn-sm" data-toggle="modal" data-target="#editmateriaModal" data-id="'.$materia->id.'" data-sigla="'.$materia->sigla.'" data-descripcion="'.$materia->descripcion.'" data-semestre_id="'.$materia->semestre_id.'">
+                      <span>
+                        <i class="fa fa-pencil"></i> Editar Materia
+                      </span>
+                    </button>
+                </li>
+                <li><a href="/materias/delete_materia/' .$materia->id. '" class="btn bg-maroon btn-sm">
                         <span>
-                            <i class="fa fa-minus"></i> Eliminar
+                            <i class="fa fa-minus"></i> Eliminar Materia
                         </span>
                     </a>
                 </li>
@@ -108,7 +122,8 @@ class MateriaController extends Controller
         $materia->semestre_id = $request->semester_id;
         $materia->save();
 
-        return redirect()->route('materias.index');
+        // return redirect()->route('materias.index');
+        return back();
     }
 
     /**
@@ -195,7 +210,13 @@ class MateriaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $materia = Materia::find($id);
+        $materia->sigla = $request->sigla;
+        $materia->descripcion = $request->descripcion;
+        $materia->semestre_id = $request->semester_id;
+        $materia->save();
+        
+        return back();
     }
 
     /**
