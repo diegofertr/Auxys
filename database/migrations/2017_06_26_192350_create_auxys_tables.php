@@ -105,7 +105,7 @@
             $table->bigInteger('estudiante_id')->unsigned();
             $table->bigInteger('materia_id')->unsigned();
             $table->integer('gestion');
-            $table->integer('semestre');
+            $table->enum('semestre',['P','S'])->nullable();
             $table->decimal('nota_examen_escrito',5,2)->nullable();
             $table->decimal('nota_examen_meritos',5,2)->nullable();
             $table->decimal('nota_examen_oral',5,2)->nullable();
