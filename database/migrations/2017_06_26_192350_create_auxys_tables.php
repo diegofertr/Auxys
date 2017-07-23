@@ -70,13 +70,11 @@
 
       //recursivo materia
         Schema::create('requisitos_m', function(Blueprint $table) {
-
             $table->bigInteger('materia_id')->unsigned();
             $table->bigInteger('materia_req_id')->unsigned();
             $table->foreign('materia_id')->references('id')->on('materias');
             $table->foreign('materia_req_id')->references('id')->on('materias');
             $table->primary(['materia_id', 'materia_req_id']);
-
         });
 
       //se cargara los datos de la api
@@ -106,15 +104,17 @@
             $table->bigIncrements('id');
             $table->bigInteger('estudiante_id')->unsigned();
             $table->bigInteger('materia_id')->unsigned();
-            $table->float('nota_examen_escrito')->unsigned();
-            $table->float('nota_meritos')->unsigned();
-            $table->float('nota_examen_oral')->unsigned();
-            $table->float('total')->unsigned();
-            $table->boolean('designado')->defualt(0);
+            $table->integer('gestion');
+            $table->integer('semestre');
+            $table->decimal('nota_examen_escrito',5,2)->nullable();
+            $table->decimal('nota_examen_meritos',5,2)->nullable();
+            $table->decimal('nota_examen_oral',5,2)->nullable();
+            $table->decimal('total',5,2)->nullable();
+            $table->boolean('designado')->default(0);
             $table->string('categoria');
             $table->foreign('estudiante_id')->references('id')->on('estudiantes');
             $table->foreign('materia_id')->references('id')->on('materias');
-            $table->unique(['estudiante_id','materia_id']);
+            $table->unique(['estudiante_id', 'materia_id', 'gestion', 'semestre']);
             $table->timestamps();
             $table->softDeletes();
         });
@@ -128,9 +128,7 @@
             $table->foreign('materia_id')->references('id')->on('materias');
             $table->unique(['estudiante_id','materia_id']); 
         });
-
     }
-
     /**
      * Reverse the migrations.
      *
