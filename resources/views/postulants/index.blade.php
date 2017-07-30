@@ -33,6 +33,7 @@ Lista de Postulantes
 										<th>Nombre</th>
 										<th>Paterno</th>
 										<th>Materno</th>
+										<th>ACTA DE CALIFICACION</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -42,6 +43,11 @@ Lista de Postulantes
 											<td>{{ $student->nombre }}</td>
 											<td>{{ $student->paterno }}</td>
 											<td>{{ $student->materno }}</td>
+											<td><div class="box-tools pull-right" data-toggle="tooltip" data-placement="left" title="Imprimir Acta de Calificación">
+					<a href="" class="btn btn-sm btn-raised btn-success dropdown-toggle enabled" data-toggle="modal" value="Print" onclick=print_postulant" >
+					&nbsp;<span class="glyphicon glyphicon-print"></span>&nbsp;
+				</a>
+				</div></td>
 										</tr>
 									@endforeach
 								</tbody>

@@ -48,4 +48,11 @@ class Materia extends Model
     {
       return $this->belongsTo(Semestre::class);
     }
+
+    public function estudiante_materia_postulado(Estudiante $student)
+    {
+      
+      return $this->belongsToMany('Auxys\Materia','materia_id');
+      
+    }
 }

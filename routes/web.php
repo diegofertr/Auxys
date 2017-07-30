@@ -53,7 +53,10 @@ Route::group(['middleware' => 'auth'], function () {
     
     //Postulants
     Route::get('print_postulants/{materia_id}/', array('as'=>'print_postulants','uses' =>'Student\PostulantsController@printPostulants'));
-
+   
+    Route::get('print_postulant', array('as'=>'print_postulant','uses' =>'Student\PostulantsController@getStudentreport'));
+    Route::get('print_draw_theme', array('as'=>'print_postulant','uses' =>'Student\PostulantsController@print_draw_certificate'));
+     Route::get('record_competence', array('as'=>'print_postulant','uses' =>'Student\PostulantsController@record_certificate_merit'));
     //convocatoria
     Route::get('print_announcement','Convocatoria\ConvocatoriaController@print_announcement');
     Route::resource('requisito_c', 'Convocatoria\RequisitosConvocatoriaController');
